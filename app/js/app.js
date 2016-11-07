@@ -148,6 +148,16 @@ angular.module("homeApp", [
                 }
             })
 
+            .state('login1', {
+                url: '/',
+                templateUrl: 'login.html',
+                controller: 'loginCtrl',
+                controllerAs: 'loginCtrl',
+                data: {
+                    requireLogin: false
+                }
+            })
+
             .state('main', {
                 url: '/main',
                 templateUrl: 'main.html',

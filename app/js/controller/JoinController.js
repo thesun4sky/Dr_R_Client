@@ -10,7 +10,8 @@ var __JoinCtrl = function ($scope, $http, $state, HOST) {
     }];
 
     $scope.idCheck = function (id) {
-        alert("id " + id);
+        if(!id) alert("알맞은 이메일을 입력하세요.");
+        else{
         $http({
             method: 'POST', //방식
             url: HOST + "/user/checkID", /* 통신할 URL */
@@ -18,25 +19,19 @@ var __JoinCtrl = function ($scope, $http, $state, HOST) {
             headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
         })
             .success(function (data, status, headers, config) {
-                if (data) {
-                    if (data.result) { //존재하지 않음,아이디 사용가능
+                    if (data) { //존재하지 않음,아이디 사용가능
                         checkedId = id;
                         alert('"' + id + '"' + '는 사용 가능합니다.');
                         /* 맞음 */
                     }
                     else {
-                        alert('"' + id + '"' + '는 사용 불가능합니다.'),
+                        alert('"' + id + '"' + '는 사용 불가능합니다.');
                             $scope.join.login_id = "";
                         console.log('아이디 사용 불가');
                         /* 틀림 */
                     }
-                }
-                else {
-                    console.log('에러에러에러');
-
-                }
             })
-
+        }
     };
 
     $scope.joinPost = function () {
@@ -61,25 +56,18 @@ var __JoinCtrl = function ($scope, $http, $state, HOST) {
             else {
                 $http({
                     method: 'POST', //방식
-                    url: "/user/join", /* 통신할 URL */
+                    url: HOST + "/user/join", /* 통신할 URL */
                     data: joinObject, /* 파라메터로 보낼 데이터 */
                     headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
                 })
                     .success(function (data, status, headers, config) {
                         if (data) {
-                            if (data.msg == 'success') {
-                                // alert(data.msg)
-                                $state.go('login1');
-                                /* 맞음 */
-                            }
-                            else {
-                                console.log('join_fail');
-                                /* 틀림 */
-                            }
+                            $state.go('login1');
+                            /* 맞음 */
                         }
                         else {
-                            console.log('에러에러에러');
-
+                            console.log('join_fail');
+                            /* 틀림 */
                         }
                     })
                     .error(function (data, status, headers, config) {
