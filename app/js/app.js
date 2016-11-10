@@ -29,6 +29,7 @@ angular.module("homeApp", [
     .controller("patientListCtrl", __PatientListCtrl)
     .controller("patientManageCtrl", __PatientManageCtrl)
     .controller("statusCtrl", __StatusCtrl)
+    .controller("diaryDetailCtrl", __DiaryDetailCtrl)
 
 
     .controller('scroll', function ($scope, $document) {
@@ -185,7 +186,19 @@ angular.module("homeApp", [
             }
         })
 
-        .state('diaryManage', {
+
+            .state('diaryDetail', {
+                url: '/diaryDetail',
+                templateUrl: 'diaryDetail.html',
+                controller: 'diaryDetailCtrl',
+                controllerAs: 'diaryDetail',
+                data: {
+                    requireLogin: true
+                }
+            })
+
+
+            .state('diaryManage', {
             url: '/diaryManage',
             templateUrl: 'diaryManage.html',
             controller: 'diaryManageCtrl',

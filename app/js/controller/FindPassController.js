@@ -22,18 +22,8 @@ var __FindPassCtrl = function ($scope, $http, $state, HOST) {
                 if (data.msg == 'false') {
                     alert('해당하는 비밀번호가 없습니다.')
                 } else {
-                    // var sendPassobject = {
-                    //     password: data.msg,
-                    //     email: $scope.findPASS.email
-                    // };
                     alert('메일로 비밀번호가 전송되었습니다.')
                     $state.go("re_login");
-                    // $http({
-                    //     method: 'POST', //방식
-                    //     url: HOST + "/user/sendEmail", /* 통신할 URL */
-                    //     data: sendPassobject, /* 파라메터로 보낼 데이터 */
-                    //     headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
-                    // })
 
                 }
             })

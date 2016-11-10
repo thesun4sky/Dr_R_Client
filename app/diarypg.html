@@ -1,8 +1,21 @@
+<style>
+    .table tbody tr:hover{
+        text-decoration: none;
+        background-color: #00ddff;
+        cursor: pointer;
+    }
+    .table tbody tr p{
+        display: none;
+    }
+    .table tbody tr:hover p {
+        display: inline;
+    }
 
+</style>
 <div class="container-fluid" style="padding-top: 50px; background-color: whitesmoke">
     <div class="row">
 
-        <div class="main">
+        <div class="diaryList">
             <h1>{{u_name}}님의 환자 일지</h1>
 
             <h2>환자 일지</h2>
@@ -18,7 +31,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
+                    <tr ng-click="toDiary(1)">
                         <td>오늘</td>
                         <td>김태선</td>
                         <td>비염</td>
