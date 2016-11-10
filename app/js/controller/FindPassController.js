@@ -27,7 +27,7 @@ var __FindPassCtrl = function ($scope, $http, $state, HOST) {
                     //     email: $scope.findPASS.email
                     // };
                     alert('메일로 비밀번호가 전송되었습니다.')
-                    $state.go("login1");
+                    $state.go("re_login");
                     // $http({
                     //     method: 'POST', //방식
                     //     url: HOST + "/user/sendEmail", /* 통신할 URL */
