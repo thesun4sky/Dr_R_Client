@@ -3,18 +3,18 @@
  */
 
 
-var __FindPassCtrl = function ($scope, $http, $state) {
+var __FindPassCtrl = function ($scope, $http, $state, HOST) {
     $scope.findPASS = [{
-        login_id: "", email: ""
+        login_id: "", name: ""
     }];
     $scope.findPASSPost = function () {
         var findPASSObject = {
             login_id: $scope.findPASS.login_id,
-            email: $scope.findPASS.email
+            u_name: $scope.findPASS.name
         };
         $http({
             method: 'POST', //방식
-            url: "/user/findPASS", /* 통신할 URL */
+            url: HOST + "/user/findPASS", /* 통신할 URL */
             data: findPASSObject, /* 파라메터로 보낼 데이터 */
             headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
         })
@@ -22,18 +22,18 @@ var __FindPassCtrl = function ($scope, $http, $state) {
                 if (data.msg == 'false') {
                     alert('해당하는 비밀번호가 없습니다.')
                 } else {
-                    var sendPassobject = {
-                        password: data.msg,
-                        email: $scope.findPASS.email
-                    };
+                    // var sendPassobject = {
+                    //     password: data.msg,
+                    //     email: $scope.findPASS.email
+                    // };
                     alert('메일로 비밀번호가 전송되었습니다.')
                     $state.go("login1");
-                    $http({
-                        method: 'POST', //방식
-                        url: "/user/sendEmail", /* 통신할 URL */
-                        data: sendPassobject, /* 파라메터로 보낼 데이터 */
-                        headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
-                    })
+                    // $http({
+                    //     method: 'POST', //방식
+                    //     url: HOST + "/user/sendEmail", /* 통신할 URL */
+                    //     data: sendPassobject, /* 파라메터로 보낼 데이터 */
+                    //     headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
+                    // })
 
                 }
             })
