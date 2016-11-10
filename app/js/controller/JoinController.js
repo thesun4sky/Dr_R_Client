@@ -6,7 +6,7 @@
 var __JoinCtrl = function ($scope, $http, $state, HOST) {
     var checkedId = "";
     $scope.join = [{
-        login_id: "", password: "", passwordck: "", name: "", hospital: ""
+        login_id: "", password: "", phone: "", passwordck: "", name: "", hospital: ""
     }];
 
     $scope.idCheck = function (id) {
@@ -15,7 +15,7 @@ var __JoinCtrl = function ($scope, $http, $state, HOST) {
         $http({
             method: 'POST', //방식
             url: HOST + "/user/checkID", /* 통신할 URL */
-            data: {login_id: id}, /* 파라메터로 보낼 데이터 */
+            data: {e_mail: id}, /* 파라메터로 보낼 데이터 */
             headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
         })
             .success(function (data, status, headers, config) {
@@ -36,14 +36,15 @@ var __JoinCtrl = function ($scope, $http, $state, HOST) {
 
     $scope.joinPost = function () {
         var joinObject = {
-            login_id: $scope.join.login_id,
-            u_password: $scope.join.password,
-            u_name: $scope.join.name,
-            u_hospital: $scope.join.hospital
+            e_mail: $scope.join.login_id,
+            a_password: $scope.join.password,
+            a_name: $scope.join.name,
+            a_phone: $scope.join.phone,
+            a_hospital: $scope.join.hospital
         };
 
 
-        if (checkedId != joinObject.login_id) {
+        if (checkedId != joinObject.e_mail) {
             alert('아이디를 중복 체크 해주세요!!');
         }
         else {
