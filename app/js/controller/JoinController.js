@@ -63,7 +63,7 @@ var __JoinCtrl = function ($scope, $http, $state, HOST) {
                     .success(function (data, status, headers, config) {
                         if (data) {
                             alert("계정이 등록되었습니다.");
-                            $state.go('login1');
+                            $state.go('re_login');
                             /* 맞음 */
                         }
                         else {

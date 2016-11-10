@@ -1,18 +1,14 @@
 <nav class="navbar navbar-dark navbar-fixed-top bg-inverse" style="background-color: rgb(64, 189, 183);">
     <!--<button type="button" class="navbar-toggler hidden-sm-up" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation"></button>-->
-    <a class="navbar-brand" href="#">Dr.Remote</a>
-    <div id="navbar">
-        <nav class="nav navbar-nav float-xs-left" style="margin-top: 30px">
-            <a class="nav-item nav-link" href="#" style="color: whitesmoke;">Dashboard</a>
-            <a class="nav-item nav-link" href="#" style="color: whitesmoke;">Settings</a>
-            <a class="nav-item nav-link" href="#" style="color: whitesmoke;">Profile</a>
-            <a class="nav-item nav-link" href="#" style="color: whitesmoke;">Help</a>
+    <a class="navbar-brand" ui-sref="main">Dr.Remote</a>
+    <div id="navbar" ng-controller="loginCtrl">
+        <nav class="nav navbar-nav" style="float: right;margin-top: 30px">
+            <a class="nav-item nav-link"  ui-sref="diary" style="color: whitesmoke;margin: 10px">일지</a>
+            <a class="nav-item nav-link"  ui-sref="patientList" style="color: whitesmoke;margin: 10px">환자</a>
+            <a class="nav-item nav-link"  ui-sref="patientEvaluate" style="color: whitesmoke;margin: 10px">평가</a>
+            <a class="nav-item nav-link" href="#" ng-click="logout()" style="color: whitesmoke;margin: 10px; ">로그아웃</a>
         </nav><form class="float-xs-right" style="float: right;margin-top: 10px">
-        <div ng-controller="loginCtrl">
-            <a class="nav-item nav-link" ng-click="logout()" style="color: whitesmoke;">logout</a>
-        </div>
-            <input type="text" class="form-control" placeholder="Search...">
+            <!--<input type="text" class="form-control" placeholder="Search...">-->
         </form>
-
     </div>
 </nav>

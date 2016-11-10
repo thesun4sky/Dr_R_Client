@@ -23,6 +23,12 @@ angular.module("homeApp", [
     .controller("leftSideBarCtrl", __LeftSidebarCtrl)
     .controller("loginCtrl", __LoginCtrl)
     .controller("indexCtrl", __IndexCtrl)
+    .controller("diaryCtrl", __DiaryCtrl)
+    .controller("diaryManageCtrl", __DiaryManageCtrl)
+    .controller("patientEvaluateCtrl", __PatientEvaluateCtrl)
+    .controller("patientListCtrl", __PatientListCtrl)
+    .controller("patientManageCtrl", __PatientManageCtrl)
+    .controller("statusCtrl", __StatusCtrl)
 
 
     .controller('scroll', function ($scope, $document) {
@@ -134,7 +140,7 @@ angular.module("homeApp", [
         };
     })
 
-    .constant('HOST', 'http://192.168.0.3:8080')
+    .constant('HOST', 'http://localhost:8080')
 
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
         $stateProvider
@@ -148,7 +154,8 @@ angular.module("homeApp", [
                 }
             })
 
-            .state('login1', {
+
+            .state('re_login', {
                 url: '/',
                 templateUrl: 'login.html',
                 controller: 'loginCtrl',
@@ -166,7 +173,67 @@ angular.module("homeApp", [
                 data: {
                     requireLogin: true
                 }
-            });
+            })
+
+        .state('diary', {
+            url: '/diary',
+            templateUrl: 'diary.html',
+            controller: 'diaryCtrl',
+            controllerAs: 'diary',
+            data: {
+                requireLogin: true
+            }
+        })
+
+        .state('diaryManage', {
+            url: '/diaryManage',
+            templateUrl: 'diaryManage.html',
+            controller: 'diaryManageCtrl',
+            controllerAs: 'diaryManage',
+            data: {
+                requireLogin: true
+            }
+        })
+
+        .state('patientEvaluate', {
+            url: '/patientEvaluate',
+            templateUrl: 'patientEvaluate.html',
+            controller: 'patientEvaluateCtrl',
+            controllerAs: 'patientEvaluate',
+            data: {
+                requireLogin: true
+            }
+        })
+
+        .state('patientList', {
+            url: '/patientList',
+            templateUrl: 'patientList.html',
+            controller: 'patientListCtrl',
+            controllerAs: 'patientList',
+            data: {
+                requireLogin: true
+            }
+        })
+
+        .state('patientManage', {
+            url: '/patientManage',
+            templateUrl: 'patientManage.html',
+            controller: 'patientManageCtrl',
+            controllerAs: 'patientManage',
+            data: {
+                requireLogin: true
+            }
+        })
+
+        .state('status', {
+            url: '/status',
+            templateUrl: 'status.html',
+            controller: 'statusCtrl',
+            controllerAs: 'status',
+            data: {
+                requireLogin: true
+            }
+        });
 
         $urlRouterProvider.otherwise('/');
         $httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';

@@ -5,4 +5,7 @@
 
 var __LeftSidebarCtrl = function ($interval, $scope, $http, store, $state, $uibModal, $rootScope, $filter) {
     var userObject = store.get('obj');
+    $scope.getClass = function (path) {
+        return ($state.$current.toString()=== path) ? 'active' : '';
+    };
 };
