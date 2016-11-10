@@ -37,9 +37,9 @@ var __JoinCtrl = function ($scope, $http, $state, HOST) {
     $scope.joinPost = function () {
         var joinObject = {
             login_id: $scope.join.login_id,
-            password: $scope.join.password,
-            name: $scope.join.name,
-            email: $scope.join.hospital
+            u_password: $scope.join.password,
+            u_name: $scope.join.name,
+            u_hospital: $scope.join.hospital
         };
 
 
@@ -62,6 +62,7 @@ var __JoinCtrl = function ($scope, $http, $state, HOST) {
                 })
                     .success(function (data, status, headers, config) {
                         if (data) {
+                            alert("계정이 등록되었습니다.");
                             $state.go('login1');
                             /* 맞음 */
                         }

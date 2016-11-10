@@ -7,9 +7,12 @@
             <a class="nav-item nav-link" href="#" style="color: whitesmoke;">Settings</a>
             <a class="nav-item nav-link" href="#" style="color: whitesmoke;">Profile</a>
             <a class="nav-item nav-link" href="#" style="color: whitesmoke;">Help</a>
-        </nav>
-        <form class="float-xs-right" style="float: right;margin-top: 10px">
+        </nav><form class="float-xs-right" style="float: right;margin-top: 10px">
+        <div ng-controller="loginCtrl">
+            <a class="nav-item nav-link" ng-click="logout()" style="color: whitesmoke;">logout</a>
+        </div>
             <input type="text" class="form-control" placeholder="Search...">
         </form>
+
     </div>
 </nav>
