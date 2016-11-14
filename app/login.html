@@ -20,27 +20,31 @@
                         <h4 class="form-signin-heading" style="margin-bottom: 30px">계정 등록을 위한 정보를 입력하세요</h4>
                         <div class="form-group">
                             <label for="inputID">메일주소(ID) :</label>
-                            <input  type="email" ng-model="join.login_id" id="inputID" class="form-control" placeholder="메일로 인증링크가 발송됩니다." required autofocus>
-                            <button type="button" class="btn btn-xs btn-primary btn-block" style="margin-bottom: 10px; background-color: #9acfea; color: #000000;" ng-click="idCheck(join.login_id)">중복 확인</button>
+                            <input  type="email" ng-model="join.e_mail" id="inputID" class="form-control" placeholder="메일로 인증링크가 발송됩니다." required autofocus>
+                            <button type="button" class="btn btn-xs btn-primary btn-block" style="margin-bottom: 10px; background-color: #9acfea; color: #000000;" ng-click="idCheck(join.e_mail)">중복 확인</button>
                         </div>
                         <div class="form-group">
                             <label for="inputPassword">패스워드 :</label>
-                            <input type="password" ng-model="join.password" id="inputPassword" class="form-control" placeholder="PassWord" required>
+                            <input type="password" ng-model="join.a_password" id="inputPassword" class="form-control" placeholder="PassWord" required>
                         </div>
 
                         <div class="form-group">
                             <label for="inputPasswordCheck">패스워드 확인 :</label>
-                            <input type="password" id="inputPasswordCheck" ng-model="join.passwordck" class="form-control" placeholder="Password Check" required>
+                            <input type="password" id="inputPasswordCheck" ng-model="join.password_ck" class="form-control" placeholder="Password Check" required>
                         </div>
                         <div class="form-group">
                             <label for="inputName">이름 :</label>
-                            <input type="text" ng-model="join.name" id="inputName" class="form-control" placeholder="Name" required>
+                            <input type="text" ng-model="join.a_name" id="inputName" class="form-control" placeholder="Name" required>
 
                         </div>
+                        <div class="form-group">
+                            <label for="inputPhone">연락처 :</label>
+                            <input type="number" ng-model="join.a_phone" id="inputPhone" class="form-control" placeholder="Phone" required>
 
+                        </div>
                         <div class="form-group" style="margin-top: 10px">
                             <label for="inputHospital">병원이름 :</label>
-                            <input type="text" ng-model="join.hospital" id="inputHospital" class="form-control" placeholder="OO병원" required>
+                            <input type="text" ng-model="join.a_hospital" id="inputHospital" class="form-control" placeholder="OO병원" required>
                         </div>
 
                         <button class="btn btn-lg btn-primary btn-block"  style="margin-top: 10px;background-color: #000066; border: 0px" type="submit" ng-disabled="isDisabled">Sign Up</button>
@@ -55,11 +59,11 @@
                         <h4 class="form-signin-heading" style="margin-bottom: 30px">비밀번호를 찾기 위한 정보를 입력하세요 </h4>
                         <div class="form-group">
                             <label for="id-for-findpw">이메일 입력 :</label>
-                            <input type="email" ng-model="findPASS.login_id" id="id-for-findpw" class="form-control" placeholder="Email" required autofocus>
+                            <input type="email" ng-model="findPASS.e_mail" id="id-for-findpw" class="form-control" placeholder="Email" required autofocus>
                         </div>
                         <div class="form-group">
                             <label for="name-for-findpw">이름 입력 :</label>
-                            <input type="name" ng-model="findPASS.name" id="name-for-findpw" class="form-control" placeholder="Name" required autofocus>
+                            <input type="name" ng-model="findPASS.a_name" id="name-for-findpw" class="form-control" placeholder="Name" required autofocus>
                         </div>
                         <button class="btn btn-lg btn-primary btn-block" type="submit" style="background-color: #000066; border: 0px">이메일로 비밀번호 받기</button>
                     </form>
@@ -78,11 +82,11 @@
                 <form  name="loginform" id='loginform' class="form-signin form-inline" ng-submit="loginPost()">
                     <div class="nav" >
                             <label for="loginId"></label>
-                            <input type="email" ng-model="login.login_id" id="loginId" class="form-control" style="border-radius: 0%; width: 100%" placeholder="EMAIL" required autofocus>
+                            <input type="email" ng-model="login.e_mail" id="loginId" class="form-control" style="border-radius: 0%; width: 100%" placeholder="EMAIL" required autofocus>
                         </div>
                         <div class="form-group" style="width: 100%">
                             <label for="loginPw"></label>
-                            <input type="password" ng-model="login.password" id="loginPw" class="form-control" style="border-radius: 0%; width: 100%" placeholder="PASS" required autofocus>
+                            <input type="password" ng-model="login.a_password" id="loginPw" class="form-control" style="border-radius: 0%; width: 100%" placeholder="PASS" required autofocus>
                         </div>
 
                         <button class="btn btn-lg btn-primary btn-block" id="mainbtn" type="submit" style="background-color: #3c3c3c; border: 0px">Sign in</button>
@@ -90,7 +94,6 @@
                         <div class="checkbox">
                         </div>
                 </form>
-
         </div>
     </div>
 <script src="js/bootstrap.js"></script>

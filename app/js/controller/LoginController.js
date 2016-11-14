@@ -5,7 +5,7 @@
 
 var __LoginCtrl = function ($scope, $http, store, $state, $filter, $interval, $rootScope, HOST) {
     $scope.login = [{
-        login_id: "", password: ""
+        e_mail: "", a_password: ""
     }];
 
     $scope.logout = function () {
@@ -27,8 +27,8 @@ var __LoginCtrl = function ($scope, $http, store, $state, $filter, $interval, $r
 
     $scope.loginPost = function () {
         var loginObject = {
-            login_id: $scope.login.login_id,
-            u_password: $scope.login.password
+            e_mail: $scope.login.e_mail,
+            a_password: $scope.login.a_password
         };
        $http({
             method: 'POST', //방식
@@ -40,7 +40,7 @@ var __LoginCtrl = function ($scope, $http, store, $state, $filter, $interval, $r
 
                 if (data.num == 1) {
                         var myInfo = {
-                            u_name: data.msg,
+                            a_name: data.msg,
                             login_time: $filter('date')(new Date(), 'yyyy-MM-dd HH-mm-ss')
                         };
 

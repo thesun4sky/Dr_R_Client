@@ -6,7 +6,7 @@
 var __JoinCtrl = function ($scope, $http, $state, HOST) {
     var checkedId = "";
     $scope.join = [{
-        login_id: "", password: "", passwordck: "", name: "", hospital: ""
+        e_mail: "", a_password: "", password_ck: "", a_name: "", a_phone: "", a_hospital: ""
     }];
 
     $scope.idCheck = function (id) {
@@ -15,7 +15,7 @@ var __JoinCtrl = function ($scope, $http, $state, HOST) {
         $http({
             method: 'POST', //방식
             url: HOST + "/user/checkID", /* 통신할 URL */
-            data: {login_id: id}, /* 파라메터로 보낼 데이터 */
+            data: {e_mail: id}, /* 파라메터로 보낼 데이터 */
             headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
         })
             .success(function (data, status, headers, config) {
@@ -26,7 +26,7 @@ var __JoinCtrl = function ($scope, $http, $state, HOST) {
                     }
                     else {
                         alert('"' + id + '"' + '는 사용 불가능합니다.');
-                            $scope.join.login_id = "";
+                            $scope.join.e_mail = "";
                         console.log('아이디 사용 불가');
                         /* 틀림 */
                     }
@@ -36,22 +36,23 @@ var __JoinCtrl = function ($scope, $http, $state, HOST) {
 
     $scope.joinPost = function () {
         var joinObject = {
-            login_id: $scope.join.login_id,
-            u_password: $scope.join.password,
-            u_name: $scope.join.name,
-            u_hospital: $scope.join.hospital
+            e_mail: $scope.join.e_mail,
+            a_password: $scope.join.a_password,
+            a_name: $scope.join.a_name,
+            a_phone: $scope.join.a_phone,
+            a_hospital: $scope.join.a_hospital
         };
 
 
-        if (checkedId != joinObject.login_id) {
+        if (checkedId != joinObject.e_mail) {
             alert('아이디를 중복 체크 해주세요!!');
         }
         else {
 
-            if ($scope.join.password != $scope.join.passwordck) {
+            if ($scope.join.a_password != $scope.join.password_ck) {
                 alert('비밀번호가 틀립니다.');
-                $scope.join.password = "";
-                $scope.join.passwordck = "";
+                $scope.join.a_password = "";
+                $scope.join.a_passwordck = "";
             }
             else {
                 $http({

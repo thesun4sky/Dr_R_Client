@@ -2,7 +2,7 @@
     <div class="row">
 
         <div class="main">
-            <h1>{{u_name}}님의 일지 보기</h1>
+            <h1>{{a_name}}님의 일지 보기</h1>
 
             <h2>일지 보기</h2>
             <div class="table-responsive">
@@ -20,7 +20,12 @@
                     <div class="sk-circle11 sk-circle"></div>
                     <div class="sk-circle12 sk-circle"></div>
                 </div>
-                <table class="table table-striped">
+
+                <button class="btn btn-link" ng-click="exportToExcel('#exportable')">
+                    <span class="glyphicon glyphicon-share"></span> Export to Excel
+                </button>
+                <div  id="exportable">
+                <table class="table table-striped export-table">
                     <thead>
                     <tr>
                         <th>아침</th>
@@ -46,6 +51,7 @@
                     </tr>
                     </tbody>
                 </table>
+                </div>
                 <br><br><br><br><br><br>
             </div>
         </div>

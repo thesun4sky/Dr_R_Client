@@ -2,10 +2,10 @@
  * Created by TeasunKim on 2016-09-12.
  */
 
-var __DiaryDetailCtrl = function ($interval, $scope, $http, store, $state, $uibModal, $rootScope, $filter, HOST) {
+var __DiaryDetailCtrl = function ($interval, $scope, $http, store, $state, $uibModal, $rootScope, $filter, HOST, Excel, $timeout) {
     var userObject = store.get('obj');
-    $scope.list_id = $rootScope.list_id ;
-    $scope.loadingStyle = {'display':'block'};
+    $scope.list_id = $rootScope.list_id;
+    $scope.loadingStyle = {'display': 'block'};
     var diaryObject = {
         list_id: $scope.list_id
     };
@@ -28,7 +28,7 @@ var __DiaryDetailCtrl = function ($interval, $scope, $http, store, $state, $uibM
                     $scope.bloodPressure = data.c_bloodPressure;
                     $scope.drinking = data.c_drinking;
 
-                    $scope.loadingStyle = {'display':'none'};
+                    $scope.loadingStyle = {'display': 'none'};
                 }
                 else {
 
@@ -36,6 +36,11 @@ var __DiaryDetailCtrl = function ($interval, $scope, $http, store, $state, $uibM
             });
     };
     $scope.diaryDetailPost();
-    $scope.u_name = userObject.u_name;
+    $scope.a_name = userObject.a_name;
+
+    $scope.exportToExcel=function(tableId){ // ex: '#my-table'
+        var exportHref=Excel.tableToExcel(tableId,'sheet name');
+        $timeout(function(){location.href=exportHref;},100); // trigger download
+    };
 };
 
