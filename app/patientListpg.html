@@ -3,31 +3,28 @@
     <div class="row">
 
         <div class="main">
-            <h1>{{u_name}}님의 환자 리스트</h1>
+            <h1>{{a_name}}님의 병원 환자 리스트</h1>
 
             <h2>환자 리스트</h2>
-            <div class="row placeholders">
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img src="img/someone.png" width="200" height="200" class="img-fluid" alt="Generic placeholder thumbnail">
-                    <h4>이문성</h4>
-                    <span class="text-muted">라식 환자</span>
-                </div>
-            </div>
 
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>일자</th>
+                        <th>가입일</th>
                         <th>환자명</th>
                         <th>병명</th>
-                        <th>상태</th>
-                        <th>특이사항</th>
+                        <th>병원</th>
+                        <th>연락처</th>
                     </tr>
                     </thead>
                     <tbody>
-                 <tr>
-
+                 <tr ng-repeat="p in allPatientList">
+                     <td>오늘</td>
+                     <td>{{p.u_name}}</td>
+                     <td>{{p.u_disease}}</td>
+                     <td>{{p.u_hospital}}</td>
+                     <td>{{p.u_phone}}</td>
                  </tr>
                     </tbody>
                 </table>
