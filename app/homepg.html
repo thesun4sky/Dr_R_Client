@@ -9,7 +9,7 @@
     <div class="row">
 
         <div class="main">
-            <h1>Dr.{{u_name}}님의 환자</h1>
+            <h1>Dr.{{a_name}}님의 환자</h1>
 
             <!-- 로딩 -->
             <div class="sk-fading-circle" ng-style="loadingStyle">
@@ -35,9 +35,9 @@
                 </div>
             </div>
 
-            <h2>{{selected_u_name}} 환자 일지<button class="btn btn-link" style="float:right" ng-click="exportToExcel('#exportable')">
+            <h3>{{selected_u_name}} 환자 일지<button class="btn btn-link" style="float:right" ng-click="exportToExcel('#exportable')">
                 <span class="glyphicon glyphicon-share"></span> Export to Excel
-            </button></h2>
+            </button></h3>
 
 
             <div id="exportable" class="table-responsive">

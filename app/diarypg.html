@@ -1,4 +1,4 @@
-<style>
+<!--<style>
     .table tbody tr:hover{
         text-decoration: none;
         background-color: #00ddff;
@@ -11,82 +11,67 @@
         display: inline;
     }
 
-</style>
+</style>-->
 <div class="container-fluid" style="padding-top: 50px; background-color: whitesmoke">
     <div class="row">
 
-        <div class="diaryList">
-            <h1>{{a_name}}님의 환자 일지</h1>
+        <div class="main">
+            <h1>Dr.{{a_name}}님의 환자 일지</h1>
 
-            <h2>환자 일지</h2>
-            <div class="table-responsive">
+            <!-- 로딩 -->
+            <div class="sk-fading-circle" ng-style="loadingStyle">
+                <div class="sk-circle1 sk-circle"></div>
+                <div class="sk-circle2 sk-circle"></div>
+                <div class="sk-circle3 sk-circle"></div>
+                <div class="sk-circle4 sk-circle"></div>
+                <div class="sk-circle5 sk-circle"></div>
+                <div class="sk-circle6 sk-circle"></div>
+                <div class="sk-circle7 sk-circle"></div>
+                <div class="sk-circle8 sk-circle"></div>
+                <div class="sk-circle9 sk-circle"></div>
+                <div class="sk-circle10 sk-circle"></div>
+                <div class="sk-circle11 sk-circle"></div>
+                <div class="sk-circle12 sk-circle"></div>
+            </div>
+
+
+            <h3>전체 환자일지<button class="btn btn-link" style="float:right" ng-click="exportToExcel('#exportable')">
+                <span class="glyphicon glyphicon-share"></span> Export to Excel
+            </button></h3>
+            <div id="exportable" class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                     <tr>
                         <th>일자</th>
                         <th>환자명</th>
                         <th>병명</th>
-                        <th>상태</th>
+                        <th>아침</th>
+                        <th>점심</th>
+                        <th>저녁</th>
+                        <th>온도</th>
+                        <th>습도</th>
+                        <th>수면시간</th>
+                        <th>혈압</th>
+                        <th>음주여부</th>
                         <th>특이사항</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-click="toDiary(1)">
-                        <td>오늘</td>
-                        <td>김태선</td>
-                        <td>비염</td>
-                        <td style="color: forestgreen">양호</td>
-                        <td>-</td>
+                    <tr ng-repeat="d in check_List">
+                        <td>{{d.c_date}}</td>
+                        <td>{{d.u_name}}</td>
+                        <td>{{d.u_disease}}</td>
+                        <td>{{d.c_breakfast}}</td>
+                        <td>{{d.c_lunch}}</td>
+                        <td>{{d.c_dinner}}</td>
+                        <td>{{d.c_temperature}}</td>
+                        <td>{{d.c_humid}}</td>
+                        <td>{{d.c_sleepTime}}</td>
+                        <td>{{d.c_bloodPressure}}</td>
+                        <td><p ng-if="d.c_drinking==1">O</p></td>
+                        <td>{{d.c_memo}}</td>
                     </tr>
-                    <tr>
-                        <td>오늘</td>
-                        <td>이문성</td>
-                        <td>라식</td>
-                        <td style="color: coral">의심</td>
-                        <td>눈주변 통증</td>
-                    </tr>
-                    <tr>
-                        <td>오늘</td>
-                        <td>김태양</td>
-                        <td>충농증</td>
-                        <td style="color: forestgreen">양호</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>오늘</td>
-                        <td>이호세아</td>
-                        <td>치아교정</td>
-                        <td style="color: forestgreen">양호</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>어제</td>
-                        <td>이호세아</td>
-                        <td>치아교정</td>
-                        <td style="color: red">위험</td>
-                        <td>교정기 고장</td>
-                    </tr>
-                    <tr>
-                        <td>어제</td>
-                        <td>김태선</td>
-                        <td>비염</td>
-                        <td style="color: forestgreen">양호</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>어제</td>
-                        <td>김태양</td>
-                        <td>충농증</td>
-                        <td style="color: forestgreen">양호</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>어제</td>
-                        <td>이문성</td>
-                        <td>라식</td>
-                        <td style="color: forestgreen">양호</td>
-                        <td>-</td>
-                    </tr>
+
                     </tbody>
                 </table>
             </div>

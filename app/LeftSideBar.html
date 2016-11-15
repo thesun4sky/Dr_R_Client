@@ -4,13 +4,13 @@
         <ul class="nav nav-sidebar">
             <li ng-class="getClass('main')"><a ui-sref="main">Overview <span class="sr-only">(current)</span></a></li>
             <li ng-class="getClass('diary')"><a ui-sref="diary">일지 보기</a></li>
-            <li ng-class="getClass('status')"><a ui-sref="status">일지 현황</a></li>
-            <li ng-class="getClass('patientList')"><a ui-sref="patientList" >환자 리스트</a></li>
+            <li ng-class="getClass('status')" ><a ui-sref="status" style="color: lightgray">일지 현황</a></li>
+            <li ng-class="getClass('diaryManage')"><a ui-sref="diaryManage" style="color: lightgray">일지 관리</a></li>
         </ul>
         <ul class="nav nav-sidebar">
+            <li ng-class="getClass('patientList')"><a ui-sref="patientList" >환자 리스트</a></li>
             <li ng-class="getClass('patientManage')"><a ui-sref="patientManage">환자 관리</a></li>
-            <li ng-class="getClass('diaryManage')"><a ui-sref="diaryManage">일지 관리</a></li>
-            <li ng-class="getClass('patientEvaluate')"><a ui-sref="patientEvaluate">환자 평가</a></li>
+            <li ng-class="getClass('patientEvaluate')"><a ui-sref="patientEvaluate" style="color: lightgray">환자 평가</a></li>
         </ul>
     </div>
 </div>

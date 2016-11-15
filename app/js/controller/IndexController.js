@@ -8,7 +8,7 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
     $scope.selected_u_name ="";
     $scope.loadingStyle = {'display': 'block'};
 
-    $scope.u_name = userObject.u_name;
+    $scope.a_name = userObject.a_name;
 
     $scope.patientListPost = function () {
 
