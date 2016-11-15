@@ -53,9 +53,9 @@
                      <td>{{p.u_disease}}</td>
                      <td>{{p.u_hospital}}</td>
                      <td>{{p.u_phone}}</td>
-                     <td><span style="color: #5e5e5e;"  ng-hide="u_id == p.u_id && !loading" >Click to Export</span>
+                     <td><span style="color: #5e5e5e;"  ng-hide="u_id == p.u_id && !loading" >Click to Check</span>
                          <button class="btn btn-link" style="width: 100px;" ng-hide="u_id != p.u_id || loading" ng-click="exportToExcel('#exportable')">
-                         <span class="glyphicon glyphicon-share"></span> Export to Excel
+                             {{numDiary}}개의 일지<br><span class="glyphicon glyphicon-share"></span>  Export to Excel
                      </button></td>
 
 

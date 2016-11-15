@@ -6,6 +6,6 @@ var __DiaryManageCtrl = function ($interval, $scope, $http, store, $state, $uibM
     var userObject = store.get('obj');
     $scope.quantity = 4;
 
-    $scope.u_name = userObject.u_name;
+    $scope.a_name = userObject.a_name;
 };
 
