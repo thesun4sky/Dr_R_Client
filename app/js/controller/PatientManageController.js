@@ -20,7 +20,7 @@ var __PatientManageCtrl = function ($interval, $scope, $http, store, $state, $ui
     $scope.getHospitalName = function () {
         $http({
             method: 'POST', //방식
-            url: HOST + "/api/getdoctorHospital", /* 통신할 URL */
+            url: HOST + "/web/api/getdoctorHospital", /* 통신할 URL */
             data: userObject, /* 파라메터로 보낼 데이터 */
             headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
         })
@@ -38,7 +38,7 @@ var __PatientManageCtrl = function ($interval, $scope, $http, store, $state, $ui
         $scope.getHospitalName();
         $http({
             method: 'POST', //방식
-            url: HOST + "/api/getAllPatientList", /* 통신할 URL */
+            url: HOST + "/web/api/getAllPatientList", /* 통신할 URL */
             data: userObject, /* 파라메터로 보낼 데이터 */
             headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
         })
@@ -62,7 +62,7 @@ var __PatientManageCtrl = function ($interval, $scope, $http, store, $state, $ui
         };
         $http({
             method: 'POST', //방식
-            url: HOST + "/api/addPatient", /* 통신할 URL */
+            url: HOST + "/web/api/addPatient", /* 통신할 URL */
             data: addPatientObject, /* 파라메터로 보낼 데이터 */
             headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
         })
@@ -84,7 +84,7 @@ var __PatientManageCtrl = function ($interval, $scope, $http, store, $state, $ui
         };
         $http({
             method: 'POST', //방식
-            url: HOST + "/api/delPatient", /* 통신할 URL */
+            url: HOST + "/web/api/delPatient", /* 통신할 URL */
             data: delPatientObject, /* 파라메터로 보낼 데이터 */
             headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
         })
