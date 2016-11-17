@@ -22,7 +22,7 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
 
         $http({
             method: 'POST', //방식
-            url: HOST + "/api/getPatientList", /* 통신할 URL */
+            url: HOST + "/web/api/getPatientList", /* 통신할 URL */
             data: userObject, /* 파라메터로 보낼 데이터 */
             headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
         })
@@ -48,7 +48,7 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
 
         $http({
             method: 'POST', //방식
-            url: HOST + "/diary/getDiaryList", /* 통신할 URL */
+            url: HOST + "/web/diary/getDiaryList", /* 통신할 URL */
             data: patientObject, /* 파라메터로 보낼 데이터 */
             headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
         })

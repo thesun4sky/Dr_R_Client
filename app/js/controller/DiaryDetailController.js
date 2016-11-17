@@ -21,7 +21,7 @@ var __DiaryDetailCtrl = function ($interval, $scope, $http, store, $state, $uibM
     $scope.diaryDetailPost = function () {
         $http({
             method: 'POST', //방식
-            url: HOST + "/diary/getDiary", /* 통신할 URL */
+            url: HOST + "/web/diary/getDiary", /* 통신할 URL */
             data: diaryObject, /* 파라메터로 보낼 데이터 */
             headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
         })

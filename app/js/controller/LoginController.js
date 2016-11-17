@@ -35,7 +35,7 @@ var __LoginCtrl = function ($scope, $http, store, $state, $filter, $interval, $r
         };
        $http({
             method: 'POST', //방식
-            url: HOST + "/user/login",
+            url: HOST + "/web/user/login",
             data: loginObject,
             headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
         })

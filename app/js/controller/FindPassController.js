@@ -14,7 +14,7 @@ var __FindPassCtrl = function ($scope, $http, $state, HOST) {
         };
         $http({
             method: 'POST', //방식
-            url: HOST + "/user/findPASS", /* 통신할 URL */
+            url: HOST + "/web/user/findPASS", /* 통신할 URL */
             data: findPASSObject, /* 파라메터로 보낼 데이터 */
             headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
         })

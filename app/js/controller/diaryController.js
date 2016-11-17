@@ -26,7 +26,7 @@ var __DiaryCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
 
         $http({
             method: 'POST', //방식
-            url: HOST + "/diary/allDiaryListPost", /* 통신할 URL */
+            url: HOST + "/web/diary/allDiaryListPost", /* 통신할 URL */
             data: doctorObject, /* 파라메터로 보낼 데이터 */
             headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
         })

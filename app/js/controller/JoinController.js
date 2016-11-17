@@ -14,7 +14,7 @@ var __JoinCtrl = function ($scope, $http, $state, HOST) {
         else{
         $http({
             method: 'POST', //방식
-            url: HOST + "/user/checkID", /* 통신할 URL */
+            url: HOST + "/web/user/checkID", /* 통신할 URL */
             data: {e_mail: id}, /* 파라메터로 보낼 데이터 */
             headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
         })
@@ -57,7 +57,7 @@ var __JoinCtrl = function ($scope, $http, $state, HOST) {
             else {
                 $http({
                     method: 'POST', //방식
-                    url: HOST + "/user/join", /* 통신할 URL */
+                    url: HOST + "/web/user/join", /* 통신할 URL */
                     data: joinObject, /* 파라메터로 보낼 데이터 */
                     headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
                 })
