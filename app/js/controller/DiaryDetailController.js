@@ -10,6 +10,14 @@ var __DiaryDetailCtrl = function ($interval, $scope, $http, store, $state, $uibM
         list_id: $scope.list_id
     };
 
+    $scope.dateTime = function(date) {
+        date = date.toString();
+        d = (date.split(' ')[0]);
+        h = (date.split(' ')[1].split(':')[0]);
+        m = (date.split(' ')[1].split(':')[1].split(':')[0]);
+        return d+"\n["+h+":"+m+"]";
+    };
+
     $scope.diaryDetailPost = function () {
         $http({
             method: 'POST', //방식

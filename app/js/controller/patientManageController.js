@@ -9,6 +9,14 @@ var __PatientManageCtrl = function ($interval, $scope, $http, store, $state, $ui
     $scope.a_name = userObject.a_name;
     $scope.loadingStyle = {'display': 'block'};
 
+    $scope.dateTime = function(date) {
+        date = date.toString();
+        d = (date.split(' ')[0]);
+        h = (date.split(' ')[1].split(':')[0]);
+        m = (date.split(' ')[1].split(':')[1].split(':')[0]);
+        return d+"\n["+h+":"+m+"]";
+    };
+
     $scope.getHospitalName = function () {
         $http({
             method: 'POST', //방식
