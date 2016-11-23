@@ -70,5 +70,6 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
         a.download = $scope.selected_u_name+" 환자 일지.xls";
         a.click();
     };
+
 };
 
