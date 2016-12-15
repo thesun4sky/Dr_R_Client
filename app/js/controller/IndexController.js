@@ -71,5 +71,11 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
         a.click();
     };
 
+
+    $scope.showImg=function(url) {
+        url = "/storedimg/" + url;
+        window.open(url,'Image','width=500px,height=500px,resizable=1');
+    }
+
 };
 
