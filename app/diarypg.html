@@ -69,7 +69,7 @@
                         <td>{{d.c_sleepTime}}</td>
                         <td>{{d.c_bloodPressure}}</td>
                         <td><p ng-if="d.c_drinking==1">O</p></td>
-                        <td>{{d.c_memo}}</td>
+                        <td>{{d.c_memo}}<span ng-if="d.c_img"><img src="/storedimg/{{d.c_img}}" ng-click="showImg(d.c_img)" style="width: 100px; height: auto;"></span> </td>
                     </tr>
 
                     </tbody>
