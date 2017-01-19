@@ -15,8 +15,22 @@
         <div class="sk-circle12 sk-circle"></div>
     </div>
     <div class="sidebar">
-        <ul class="nav nav-sidebar">
-            전체 환자리스트
+        <ul class="nav nav-pills">
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                    환자 목록<span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">전체보기</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">소아청소년과</a></li>
+                    <li><a href="#">안과</a></li>
+                    <li><a href="#">피부과</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">남자</a></li>
+                    <li><a href="#">여자</a></li>
+                </ul>
+            </li>
         </ul>
         <ul class="nav nav-sidebar" ng-repeat="p in allPatientList" ng-click="diaryListPost(p.u_id,p.u_name)" style="margin-bottom: 0px">
             <li><a ui-sref="main">{{p.u_name}} <span class="sr-only">(current)</span>({{p.u_sex}})</a></li>

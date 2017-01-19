@@ -5,12 +5,12 @@
 
 var __FindPassCtrl = function ($scope, $http, $state, HOST) {
     $scope.findPASS = [{
-        login_id: "", name: ""
+        e_mail: "", a_name: ""
     }];
     $scope.findPASSPost = function () {
         var findPASSObject = {
-            login_id: $scope.findPASS.login_id,
-            u_name: $scope.findPASS.name
+            e_mail: $scope.findPASS.e_mail,
+            a_name: $scope.findPASS.a_name
         };
         $http({
             method: 'POST', //방식
