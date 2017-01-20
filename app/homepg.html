@@ -32,45 +32,99 @@
 
             </div>
 
-            <h3>{{selected_u_name}} 환자 일지<button class="btn btn-link" style="float:right" ng-click="exportToExcel('#exportable')">
-                <span class="glyphicon glyphicon-share"></span> Export to Excel
-            </button></h3>
+            <h3>{{selected_u_name}} 환자 일지</h3>
 
+            <ul class="nav nav-tabs nav-justified">
+                <li role="presentation" ng-class="{'active': showType === 'list'}"><a ui-sref="main" ng-click="showList()">리스트</a></li>
+                <li role="presentation" ng-class="{'active': showType === 'graph'}"><a ui-sref="main" ng-click="showGraph()">그래프</a></li>
+            </ul>
+            <button class="btn btn-link" style="float:right" ng-click="exportToExcel('#exportable')">
+                <span class="glyphicon glyphicon-share"></span> Export to Excel
+            </button>
+
+            <div id="sleepList" class="table-responsive" ng-if="showType=='list'">
+                <h3>수면 일지</h3>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>일자</th>
+                        <th>이름</th>
+                        <th>수면 시작</th>
+                        <th>수면 종료</th>
+                        <th>총 수면시간</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="s in sleep_List">
+                        <td>{{s.s_start | date:"MM월dd일"}}</td>
+                        <td>{{s.u_name}}</td>
+                        <td>{{s.s_start | date:"[h:mm]"}}</td>
+                        <td>{{s.s_end | date:"[h:mm]"}}</td>
+                        <td>{{s.s_total | date:"[h:mm]"}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="feedList" class="table-responsive" ng-if="showType=='list'">
+                <h3>수유 일지</h3>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>일자</th>
+                        <th>이름</th>
+                        <th>수유 시작</th>
+                        <th>수유 종료</th>
+                        <th>총 수유시간</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="f in feed_List">
+                        <td>{{f.f_start | date:"MM월dd일"}}</td>
+                        <td>{{f.u_name}}</td>
+                        <td>{{f.f_start | date:"[h:mm]"}}</td>
+                        <td>{{f.f_end | date:"[h:mm]"}}</td>
+                        <td>{{f.f_total}}</td>
+                        <td>{{f.feed}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div id="diaryGraph" class="table-responsive" ng-if="showType=='graph'">
+                This is graph
+            </div>
 
             <div id="exportable" class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                     <tr>
                         <th>일자</th>
-                        <th>환자명</th>
-                        <th>병명</th>
-                        <th>아침</th>
-                        <th>점심</th>
-                        <th>저녁</th>
-                        <th>온도</th>
-                        <th>습도</th>
-                        <th>수면시간</th>
-                        <th>혈압</th>
-                        <th>음주여부</th>
-                        <th>특이사항</th>
+                        <th>이름</th>
+                        <th>키</th>
+                        <th>몸무게</th>
+                        <th>엄마일기</th>
+                        <th>진료병원</th>
+                        <th>진료사유</th>
+                        <th>접종</th>
+                        <th>진료 예정일</th>
+                        <th>진료 예정과</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="d in check_List">
-                        <td>{{dateTime(d.c_date)}}</td>
-                        <td>{{d.u_name}}</td>
-                        <td>{{d.u_disease}}</td>
-                        <td>{{d.c_breakfast}}</td>
-                        <td>{{d.c_lunch}}</td>
-                        <td>{{d.c_dinner}}</td>
-                        <td>{{d.c_temperature}}</td>
-                        <td>{{d.c_humid}}</td>
-                        <td>{{d.c_sleepTime}}</td>
-                        <td>{{d.c_bloodPressure}}</td>
-                        <td><p ng-if="d.c_drinking==1">O</p></td>
-                        <td>{{d.c_memo}}<span ng-if="d.c_img"><img src="/storedimg/{{d.c_img}}" ng-click="showImg(d.c_img)" style="width: 100px; height: auto;"></span> </td>
-                    </tr>
-
+                        <tr ng-repeat="d in check_List">
+                            <td>{{d.c_date | date:"MM월dd일 [h:mm]"}}</td>
+                            <td>{{d.u_name}}</td>
+                            <td>{{d.c_h}}</td>
+                            <td>{{d.c_w}}</td>
+                            <td>{{d.c_memo}}<span ng-if="d.c_img"><img src="/storedimg/{{d.c_img}}" ng-click="showImg(d.c_img)" style="width: 100px; height: auto;"></span> </td>
+                            <td>{{d.c_hospital}}</td>
+                            <td>{{d.c_treat}}</td>
+                            <td>{{d.c_shot}}</td>
+                            <td><span ng-if="d.c_next!=0">{{dateTime(d.c_next)}}</span></td>
+                            <td>{{d.c_depart}}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

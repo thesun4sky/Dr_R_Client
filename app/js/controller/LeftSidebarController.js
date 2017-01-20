@@ -16,6 +16,7 @@ var __LeftSidebarCtrl = function ($interval, $scope, $http, store, $state, $uibM
     $scope.dateTime = function(date) {
         date = date.toString();
         d = (date.split(' ')[0]);
+        d = (d.split('-')[1] + "월" + d.split('-')[2] + "일");
         h = (date.split(' ')[1].split(':')[0]);
         m = (date.split(' ')[1].split(':')[1].split(':')[0]);
         return d+"\n["+h+":"+m+"]";
@@ -32,6 +33,7 @@ var __LeftSidebarCtrl = function ($interval, $scope, $http, store, $state, $uibM
         })
             .success(function (data, status, headers, config) {
                 if (data) { //존재하지 않음,아이디 사용가능
+                    console.log(data);
                     $scope.allPatientList = data;
                     $scope.loadingStyle = {'display': 'none'};
                 }
@@ -41,6 +43,7 @@ var __LeftSidebarCtrl = function ($interval, $scope, $http, store, $state, $uibM
             });
     };
     $scope.allPatientListPost();
+
 
 
 };

@@ -7,16 +7,16 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
     $scope.quantity = 4;
     $scope.selected_u_name ="";
     $scope.loadingStyle = {'display': 'block'};
-
+    $scope.showType = "list";
     $scope.a_name = userObject.a_name;
 
     $scope.dateTime = function(date) {
         date = date.toString();
         d = (date.split(' ')[0]);
-        h = (date.split(' ')[1].split(':')[0]);
-        m = (date.split(' ')[1].split(':')[1].split(':')[0]);
-        return d+"\n["+h+":"+m+"]";
+        d = (d.split('-')[1] + "월" + d.split('-')[2] + "일");
+        return d;
     };
+
 
     $scope.patientListPost = function () {
 
@@ -28,6 +28,7 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
         })
             .success(function (data, status, headers, config) {
                 if (data) { //존재하지 않음,아이디 사용가능
+                    console.log(data);
                     $scope.patientList = data;
                     $scope.loadingStyle = {'display': 'none'};
                 }
@@ -36,8 +37,6 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
                 }
             });
     };
-    $scope.patientListPost();
-
 
     $scope.diaryListPost = function (u_id,u_name) {
         $scope.selected_u_name = u_name;
@@ -54,7 +53,35 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
         })
             .success(function (data, status, headers, config) {
                 if (data) { //존재하지 않음,아이디 사용가능
+                    console.log(data);
                     $scope.check_List = data;
+                    $scope.loadingStyle = {'display': 'none'};
+                    $scope.sleepListPost(u_id,u_name);
+                    $scope.feedListPost(u_id,u_name);
+                }
+                else {
+
+                }
+            });
+    };
+
+
+    $scope.sleepListPost = function (u_id,u_name) {
+        $scope.selected_u_name = u_name;
+        $scope.loadingStyle = {'display': 'block'};
+        var patientObject = {
+            u_id : u_id
+        };
+
+        $http({
+            method: 'POST', //방식
+            url: HOST + "/web/diary/getSleepList", /* 통신할 URL */
+            data: patientObject, /* 파라메터로 보낼 데이터 */
+            headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
+        })
+            .success(function (data, status, headers, config) {
+                if (data) { //존재하지 않음,아이디 사용가능
+                    $scope.sleep_List = data;
                     $scope.loadingStyle = {'display': 'none'};
                 }
                 else {
@@ -62,6 +89,44 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
                 }
             });
     };
+
+
+    $scope.feedListPost = function (u_id,u_name) {
+        $scope.selected_u_name = u_name;
+        $scope.loadingStyle = {'display': 'block'};
+        var patientObject = {
+            u_id : u_id
+        };
+
+        $http({
+            method: 'POST', //방식
+            url: HOST + "/web/diary/getFeedList", /* 통신할 URL */
+            data: patientObject, /* 파라메터로 보낼 데이터 */
+            headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
+        })
+            .success(function (data, status, headers, config) {
+                if (data) { //존재하지 않음,아이디 사용가능
+                    $scope.feed_List = data;
+                    $scope.loadingStyle = {'display': 'none'};
+                }
+                else {
+
+                }
+            });
+    };
+
+    $scope.showList = function () {
+        $scope.showType = 'list';
+    };
+
+    $scope.showGraph = function () {
+        $scope.showType = 'graph';
+    };
+
+
+    $scope.patientListPost();
+
+
     $scope.exportToExcel=function(tableId){ // ex: '#my-table'
         var exportHref=Excel.tableToExcel(tableId,$scope.selected_u_name+" 환자");
         // $timeout(function(){location.href=exportHref;},100); // trigger download
