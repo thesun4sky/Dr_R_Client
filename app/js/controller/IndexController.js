@@ -17,6 +17,16 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
         return d;
     };
 
+    $scope.timeSplit = function(mill) {
+        var str = "";
+        h = parseInt(mill/360);
+        if(h > 0) str += h + "시간 ";
+        mill = mill%360;
+        m = parseInt(mill/60);
+        if(m > 0) str += m + "분 ";
+        s = mill%60;
+        return str+s+"초";
+    };
 
     $scope.patientListPost = function () {
 

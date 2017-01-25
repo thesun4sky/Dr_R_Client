@@ -38,11 +38,8 @@
                 <li role="presentation" ng-class="{'active': showType === 'list'}"><a ui-sref="main" ng-click="showList()">리스트</a></li>
                 <li role="presentation" ng-class="{'active': showType === 'graph'}"><a ui-sref="main" ng-click="showGraph()">그래프</a></li>
             </ul>
-            <button class="btn btn-link" style="float:right" ng-click="exportToExcel('#exportable')">
-                <span class="glyphicon glyphicon-share"></span> Export to Excel
-            </button>
 
-            <div id="sleepList" class="table-responsive" ng-if="showType=='list'">
+            <div id="sleepList" class="table-responsive col-sm-6 col-md-6 col-lg-6 col-xs-6" ng-if="showType=='list'">
                 <h3>수면 일지</h3>
                 <table class="table table-striped">
                     <thead>
@@ -58,15 +55,15 @@
                     <tr ng-repeat="s in sleep_List">
                         <td>{{s.s_start | date:"MM월dd일"}}</td>
                         <td>{{s.u_name}}</td>
-                        <td>{{s.s_start | date:"[h:mm]"}}</td>
-                        <td>{{s.s_end | date:"[h:mm]"}}</td>
-                        <td>{{s.s_total | date:"[h:mm]"}}</td>
+                        <td>{{s.s_start | date:"h시 mm분 ss초"}}</td>
+                        <td>{{s.s_end | date:"h시 mm분 ss초"}}</td>
+                        <td>{{timeSplit(s.s_total)}}</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
 
-            <div id="feedList" class="table-responsive" ng-if="showType=='list'">
+            <div id="feedList" class="table-responsive col-sm-6 col-md-6 col-lg-6 col-xs-6" ng-if="showType=='list'">
                 <h3>수유 일지</h3>
                 <table class="table table-striped">
                     <thead>
@@ -82,9 +79,10 @@
                     <tr ng-repeat="f in feed_List">
                         <td>{{f.f_start | date:"MM월dd일"}}</td>
                         <td>{{f.u_name}}</td>
-                        <td>{{f.f_start | date:"[h:mm]"}}</td>
-                        <td>{{f.f_end | date:"[h:mm]"}}</td>
-                        <td>{{f.f_total}}</td>
+                        <td>{{f.f_start | date:"h시 mm분"}}</td>
+                        <td><span ng-if="f.feed!='분유'">{{f.f_end | date:"h시 mm분"}}</span></td>
+                        <td><span ng-if="f.feed!='분유'">{{timeSplit(f.f_total)}}</span>
+                            <span ng-if="f.feed=='분유'">{{f.f_total}}cc</span></td>
                         <td>{{f.feed}}</td>
                     </tr>
                     </tbody>
@@ -92,11 +90,16 @@
             </div>
 
 
-            <div id="diaryGraph" class="table-responsive" ng-if="showType=='graph'">
+            <div id="diaryGraph" class="table-responsive col-sm-12 col-md-12 col-lg-12 col-xs-12" ng-if="showType=='graph'">
                 This is graph
             </div>
 
-            <div id="exportable" class="table-responsive">
+            <div id="exportable" class="table-responsive col-sm-12 col-md-12 col-lg-12 col-xs-12">
+
+                <button class="btn btn-link" style="float:right" ng-click="exportToExcel('#exportable')">
+                    <span class="glyphicon glyphicon-share"></span> Export to Excel
+                </button>
+                <br/>
                 <table class="table table-striped">
                     <thead>
                     <tr>
