@@ -35,8 +35,8 @@
             <h3>{{selected_u_name}} 환자 일지</h3>
 
             <ul class="nav nav-tabs nav-justified">
-                <li role="presentation" ng-class="{'active': showType === 'list'}"><a ui-sref="main" ng-click="showList()">리스트</a></li>
-                <li role="presentation" ng-class="{'active': showType === 'graph'}"><a ui-sref="main" ng-click="showGraph()">그래프</a></li>
+                <li role="presentation" ng-class="{'active': showType === 'list'}"><a ui-sref="main" ng-click="showList()">리스트로 보기</a></li>
+                <li role="presentation" ng-class="{'active': showType === 'graph'}"><a ui-sref="main" ng-click="showGraph()">그래프로 보기</a></li>
             </ul>
 
             <div id="sleepList" class="table-responsive col-sm-6 col-md-6 col-lg-6 col-xs-6" ng-if="showType=='list'">
