@@ -52,12 +52,19 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="s in sleep_List">
+                    <tr ng-repeat="s in sleep_List track by $index" ng-if="$index < maxSleepRepeat">
                         <td>{{s.s_start | date:"MM월dd일"}}</td>
                         <td>{{s.u_name}}</td>
                         <td>{{s.s_start | date:"h시 mm분 ss초"}}</td>
                         <td>{{s.s_end | date:"h시 mm분 ss초"}}</td>
                         <td>{{timeSplit(s.s_total)}}</td>
+                    </tr>
+                    <tr>
+                        <th colspan="6">
+                            <button class="btn btn-link" style="float:right;width: 100%" ng-click="addMaxSleepRepeat()">
+                                <span class="glyphicon glyphicon-plus"></span> 더보기
+                            </button>
+                        </th>
                     </tr>
                     </tbody>
                 </table>
@@ -76,7 +83,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="f in feed_List">
+                    <tr ng-repeat="f in feed_List track by $index" ng-if="$index < maxFeedRepeat">
                         <td>{{f.f_start | date:"MM월dd일"}}</td>
                         <td>{{f.u_name}}</td>
                         <td>{{f.f_start | date:"h시 mm분"}}</td>
@@ -85,13 +92,33 @@
                             <span ng-if="f.feed=='분유'">{{f.f_total}}cc</span></td>
                         <td>{{f.feed}}</td>
                     </tr>
+                    <tr>
+                        <th colspan="6">
+                            <button class="btn btn-link" style="float:right;width: 100%" ng-click="addMaxFeedRepeat()">
+                                <span class="glyphicon glyphicon-plus"></span> 더보기
+                            </button>
+                        </th>
+                    </tr>
                     </tbody>
                 </table>
             </div>
 
 
-            <div id="diaryGraph" class="table-responsive col-sm-12 col-md-12 col-lg-12 col-xs-12" ng-if="showType=='graph'">
-                This is graph
+            <div id="sleepGraph" class="table-responsive col-sm-12 col-md-12 col-lg-12 col-xs-12" ng-if="showType=='graph'">
+                <h3>수면 그래프</h3>
+                <canvas id="line" class="chart chart-line" chart-data="sleepArray"
+                        chart-labels="sleepDates" chart-legend="true" chart-series="sleep_series"
+                        chart-click="LineOnClick" height="60" chart-colours="colours">
+                </canvas>
+            </div>
+
+
+            <div id="feedGraph" class="table-responsive col-sm-12 col-md-12 col-lg-12 col-xs-12" ng-if="showType=='graph'">
+                <h3>수유 그래프</h3>
+                <canvas id="line2" class="chart chart-line" chart-data="feedArray"
+                        chart-labels="feedDates" chart-legend="true" chart-series="feed_series"
+                        chart-click="LineOnClick" height="60" chart-colours="colours">
+                </canvas>
             </div>
 
             <div id="exportable" class="table-responsive col-sm-12 col-md-12 col-lg-12 col-xs-12">
@@ -116,7 +143,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="d in check_List">
+                        <tr ng-repeat="d in check_List track by $index" ng-if="$index < maxListRepeat">
                             <td>{{d.c_date | date:"MM월dd일 [h:mm]"}}</td>
                             <td>{{d.u_name}}</td>
                             <td>{{d.c_h}}</td>
@@ -127,6 +154,13 @@
                             <td>{{d.c_shot}}</td>
                             <td><span ng-if="d.c_next!=0">{{dateTime(d.c_next)}}</span></td>
                             <td>{{d.c_depart}}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="10">
+                                <button class="btn btn-link" style="float:right;width: 100%" ng-click="addMaxListRepeat()">
+                                    <span class="glyphicon glyphicon-plus"></span> 더보기
+                                </button>
+                            </th>
                         </tr>
                     </tbody>
                 </table>
