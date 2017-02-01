@@ -56,6 +56,7 @@ var __LoginCtrl = function ($scope, $http, store, $state, $filter, $interval, $r
                     else {
                     $scope.dis = false;
                     alert(data.msg);
+                    $scope.loadingStyle = {'display': 'none'};
                      }
 
             })

@@ -72,17 +72,17 @@
         </div>
     </div>
             <!-- Wrapper for slides -->
-    <style>
-        .view {
-            display: none;
-        }
+        <style>
+         .view {
+             display: none;
+         }
     </style>
             <div ng-controller="loginCtrl" id="login" class="view" style="bottom: 10px; text-align: -webkit-center">
                 <img src="img/logo.png" style="width: 10%; height: auto;">
                 <form  name="loginform" id='loginform' class="form-signin form-inline" ng-submit="loginPost()">
                     <div class="nav" >
                             <label for="loginId"></label>
-                            <input type="email" ng-model="login.e_mail" id="loginId" class="form-control" style="border-radius: 0%; width: 100%" placeholder="EMAIL" ng-disabled="dis" required autofocus>
+                            <input type="text" ng-model="login.e_mail" id="loginId" class="form-control" style="border-radius: 0%; width: 100%" placeholder="ID" ng-disabled="dis" required autofocus>
                         </div>
                         <div class="form-group" style="width: 100%">
                             <label for="loginPw"></label>

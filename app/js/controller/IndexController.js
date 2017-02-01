@@ -4,20 +4,31 @@
 
 var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, $rootScope, $filter, HOST, Excel, $timeout) {
     var userObject = store.get('obj');
+    $scope.start = false;
     $scope.quantity = 4;
     $scope.selected_u_name ="";
-    $scope.sleep_series = ['수면', ''];
-    $scope.feed_series = ['수유', ''];
+    $scope.sleep_series = ['수면(초)', ''];
+    $scope.feed_series = ['수유(초)', '분유(cc)'];
+    $scope.temp_series = ['온도', '미세먼지','이산화탄소','VOC'];
+    $scope.dust_series = ['미세먼지', ''];
+    $scope.co_series = ['이산화탄소', ''];
+    $scope.voc_series = ['VOC', ''];
     $scope.loadingStyle = {'display': 'block'};
     $scope.showType = "list";
     $scope.a_name = userObject.a_name;
     $scope.maxFeedRepeat = 5;
     $scope.maxSleepRepeat = 5;
     $scope.maxListRepeat = 10;
+    $scope.maxTHListRepeat = 5;
     $scope.sleepArray = [];
     $scope.sleepDates = [];
     $scope.feedArray = [];
     $scope.feedDates = [];
+    $scope.tempArray = [];
+    $scope.dustArray = [];
+    $scope.coArray = [];
+    $scope.vocArray = [];
+    $scope.dataDates = [];
 
     $scope.addMaxSleepRepeat = function() {
         $scope.maxSleepRepeat += 5;
@@ -29,6 +40,9 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
 
     $scope.addMaxListRepeat = function() {
         $scope.maxListRepeat += 5;
+    };
+    $scope.addMaxTHListRepeat = function () {
+        $scope.maxTHListRepeat += 5;
     };
     $scope.dateTime = function(date) {
         date = date.toString();
@@ -58,7 +72,6 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
         })
             .success(function (data, status, headers, config) {
                 if (data) { //존재하지 않음,아이디 사용가능
-                    console.log(data);
                     $scope.patientList = data;
                     $scope.loadingStyle = {'display': 'none'};
                 }
@@ -81,6 +94,7 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
     $scope.diaryListPost = function (u_id,u_name) {
         $scope.selected_u_name = u_name;
         $scope.loadingStyle = {'display': 'block'};
+        $scope.start = true;
         var patientObject = {
             u_id : u_id
         };
@@ -93,15 +107,16 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
         })
             .success(function (data, status, headers, config) {
                 if (data) { //존재하지 않음,아이디 사용가능
-                    console.log(data);
                     $scope.check_List = data;
                     $scope.loadingStyle = {'display': 'none'};
                     $scope.sleepListPost(u_id,u_name);
                     $scope.feedListPost(u_id,u_name);
+                    $scope.dataListPost(u_id,u_name);
 
                     $scope.maxFeedRepeat = 5;
                     $scope.maxSleepRepeat = 5;
                     $scope.maxListRepeat = 10;
+                    $scope.maxTHListRepeat = 5;
                 }
                 else {
 
@@ -128,24 +143,25 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
                     $scope.sleep_List = data;
                     $scope.sleepArray = [];
                     $scope.sleepDates = [];
+                    var array = [];
+                    var dates = [];
                     var prev_date = "";
                     var total_sleep = 0;
-                    $scope.sleep_List.forEach(function (sleep_Data) {
-
-                        var s_date = new Date(sleep_Data.s_start);
+                    for(var i=0; i<data.length; i++){
+                        var s_date = new Date(data[i].s_start);
                         s_date = "" + (s_date.getYear()+1900) +"_"+ (s_date.getMonth()+1) +"_"+ s_date.getDate();
 
-                        if(prev_date == s_date || prev_date == "") {
-                            total_sleep += sleep_Data.s_total;
-                        }
-                        else{
-                            $scope.sleepArray.push(total_sleep);
-                            $scope.sleepDates.push(""+s_date);
+                        if(prev_date != s_date && prev_date != ""){
+                            array.push(total_sleep);
+                            dates.push(""+prev_date);
                             total_sleep = 0;
                         }
+
+                        total_sleep += data[i].s_total;
                         prev_date = s_date;
-                    });
-                    $scope.sleepArray = [$scope.sleepArray,[]];
+                    }
+                    $scope.sleepArray = [array,[]];
+                    $scope.sleepDates = dates;
                        /* */
                     $scope.loadingStyle = {'display': 'none'};
                 }
@@ -169,29 +185,108 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
             data: patientObject, /* 파라메터로 보낼 데이터 */
             headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
         })
-            .success(function (data, status, headers, config) {
+            .success(function (data) {
                 if (data) { //존재하지 않음,아이디 사용가능
                     $scope.feed_List = data;
                     $scope.feedArray = [];
                     $scope.feedDates = [];
                     var prev_date = "";
                     var total_feed = 0;
-                    $scope.feed_List.forEach(function (feed_Data) {
-
-                        var f_date = new Date(feed_Data.f_start);
+                    var total_powder = 0;
+                    var array1 = [];
+                    var array2 = [];
+                    var dates = [];
+                    for(var i=0; i<data.length; i++){
+                        var f_date = new Date(data[i].f_start);
                         f_date = "" + (f_date.getYear()+1900) +"_"+ (f_date.getMonth()+1) +"_"+ f_date.getDate();
 
-                        if(prev_date == f_date || prev_date == "") {
-                            total_feed += feed_Data.f_total;
-                        }
-                        else{
-                            $scope.feedArray.push(total_feed);
-                            $scope.feedDates.push(""+f_date);
+                        if(prev_date != f_date && prev_date != ""){
+                            array1.push(total_feed);
+                            array2.push(total_powder);
+                            dates.push(""+prev_date);
                             total_feed = 0;
+                            total_powder = 0;
                         }
+
+                        if(data[i].feed == '분유'){
+                            total_powder += data[i].f_total;
+                        }
+                        else if(data[i].feed == '좌' || data[i].feed == '우' ){
+                            total_feed += data[i].f_total;
+                        }
+
+
                         prev_date = f_date;
-                    });
-                    $scope.feedArray = [$scope.feedArray,[]];
+                    }
+
+                    $scope.feedArray = [array1,array2];
+                    $scope.feedDates = dates;
+                    $scope.loadingStyle = {'display': 'none'};
+                }
+                else {
+
+                }
+            });
+    };
+    $scope.dataListPost = function (u_id,u_name) {
+        $scope.selected_u_name = u_name;
+        $scope.loadingStyle = {'display': 'block'};
+        var patientObject = {
+            u_id : u_id
+        };
+
+        $http({
+            method: 'POST', //방식
+            url: HOST + "/web/diary/getDataList", /* 통신할 URL */
+            data: patientObject, /* 파라메터로 보낼 데이터 */
+            headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
+        })
+            .success(function (data) {
+                if (data) { //존재하지 않음,아이디 사용가능
+                    $scope.data_List = data;
+                    $scope.tempArray = [];
+                    $scope.dustArray = [];
+                    $scope.coArray = [];
+                    $scope.vocArray = [];
+                    $scope.dataDates = [];
+                    var prev_date = "";
+                    var total_temp = 0;
+                    var total_dust= 0;
+                    var total_co = 0;
+                    var total_voc = 0;
+                    for(var i=0, cnt=0; i<data.length; i++,cnt++){
+                        var d_date = new Date(data[i].d_date);
+                        d_date = "" + (d_date.getYear()+1900) +"_"+ (d_date.getMonth()+1) +"_"+ d_date.getDate();
+
+                        if(prev_date != d_date && prev_date != ""){
+                            total_temp = total_temp/cnt;
+                            total_dust = total_dust/cnt;
+                            total_co = total_co/cnt;
+                            total_voc = total_voc/cnt;
+                            $scope.tempArray.push(total_temp.toFixed(3));
+                            $scope.dustArray.push(total_dust.toFixed(3));
+                            $scope.coArray.push(total_co.toFixed(3));
+                            $scope.vocArray.push(total_voc.toFixed(3));
+                            $scope.dataDates.push(""+prev_date);
+                            total_temp = 0;
+                            total_dust= 0;
+                            total_co = 0;
+                            total_voc = 0;
+                            cnt = 0;
+                        }
+
+                        total_temp += data[i].d_temperature;
+                        total_dust += data[i].d_dust;
+                        total_co += data[i].d_co2;
+                        total_voc += data[i].d_voc;
+
+                        prev_date = d_date;
+                    }
+                    $scope.tempArray = [$scope.tempArray,$scope.dustArray,$scope.coArray,$scope.vocArray];
+                    $scope.dustArray = [$scope.dustArray,[]];
+                    $scope.coArray = [$scope.coArray,[]];
+                    $scope.vocArray = [$scope.vocArray,[]];
+                    /* */
                     $scope.loadingStyle = {'display': 'none'};
                 }
                 else {
@@ -200,24 +295,24 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
             });
     };
 
-    $scope.showList = function () {
-        $scope.showType = 'list';
+    $scope.showList = function (type) {
+        $scope.showType = type + 'list';
     };
 
-    $scope.showGraph = function () {
-        $scope.showType = 'graph';
+    $scope.showGraph = function (type) {
+        $scope.showType = type + 'graph';
     };
 
 
     $scope.patientListPost();
 
 
-    $scope.exportToExcel=function(tableId){ // ex: '#my-table'
+    $scope.exportToExcel=function(tableId,type){ // ex: '#my-table'
         var exportHref=Excel.tableToExcel(tableId,$scope.selected_u_name+" 환자");
         // $timeout(function(){location.href=exportHref;},100); // trigger download
         var a = document.createElement('a');
         a.href=exportHref;
-        a.download = $scope.selected_u_name+" 환자 일지.xls";
+        a.download = $scope.selected_u_name+ type + ".xls";
         a.click();
     };
 
