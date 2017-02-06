@@ -4,6 +4,7 @@
 
 angular.module("homeApp", [
     'chart.js',
+    'ps.chartjs',
     'ngAnimate',
     'ui.router',
     'ngFileUpload',
@@ -54,7 +55,6 @@ angular.module("homeApp", [
             }
         });
     })
-
     .filter('unique', function () {
         return function (collection, keyname) {
             var output = [],

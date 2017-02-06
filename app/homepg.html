@@ -120,19 +120,29 @@
 
             <div id="sleepGraph" class="table-responsive col-sm-12 col-md-12 col-lg-12 col-xs-12" ng-if="showType=='SFgraph'">
                 <h3>수면 그래프</h3>
-                <canvas id="line" class="chart chart-line" chart-data="sleepArray"
+               <!-- <canvas id="line" class="chart chart-line" chart-data="sleepArray"
                         chart-labels="sleepDates" chart-legend="true" chart-series="sleep_series"
                         chart-click="LineOnClick" height="60" chart-colours="colours">
-                </canvas>
+                </canvas>-->
+                <canvas ps-chart
+                        chart-type="line"
+                        chart-data="sleepData"
+                        chart-options="sleepOptions"
+                        chart-click="LineOnClick" height="60" chart-colours="colours"></canvas>
             </div>
 
 
             <div id="feedGraph" class="table-responsive col-sm-12 col-md-12 col-lg-12 col-xs-12" ng-if="showType=='SFgraph'">
                 <h3>수유 그래프</h3>
-                <canvas id="line2" class="chart chart-line" chart-data="feedArray"
-                        chart-labels="feedDates" chart-legend="true" chart-series="feed_series"
+                <!--<canvas id="line2" class="chart chart-line" chart-datasets="datasets"
+                        chart-labels="feedDates" chart-series="feed_series"  chart-options="options" chart-dataset-override="datasetOverride"
                         chart-click="LineOnClick" height="60" chart-colours="colours">
-                </canvas>
+                </canvas>-->
+                <canvas ps-chart
+                        chart-type="line"
+                        chart-data="feedData"
+                        chart-options="options"
+                        chart-click="LineOnClick" height="60" chart-colours="colours"></canvas>
             </div>
 
             <div class="table-responsive col-sm-12 col-md-12 col-lg-12 col-xs-12" ng-if="showType=='THlist'">
@@ -172,10 +182,15 @@
 
             <div id="tempGraph" class="table-responsive col-sm-12 col-md-12 col-lg-12 col-xs-12" ng-if="showType=='THgraph'">
                 <h3>환경정보 그래프</h3>
-                <canvas id="line3" class="chart chart-line" chart-data="tempArray"
+              <!--  <canvas id="line3" class="chart chart-line" chart-data="tempArray"
                         chart-labels="dataDates" chart-legend="true" chart-series="temp_series"
                         chart-click="LineOnClick" height="100" chart-colours="colours">
-                </canvas>
+                </canvas>-->
+                <canvas ps-chart
+                        chart-type="line"
+                        chart-data="dataData"
+                        chart-options="dataOptions"
+                        chart-click="LineOnClick" height="60" chart-colours="colours"></canvas>
             </div>
 
 

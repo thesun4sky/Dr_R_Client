@@ -2,13 +2,13 @@
  * Created by TeasunKim on 2016-09-12.
  */
 
-var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, $rootScope, $filter, HOST, Excel, $timeout) {
+var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, $rootScope, $filter, HOST, Excel) {
     var userObject = store.get('obj');
     $scope.start = false;
     $scope.quantity = 4;
     $scope.selected_u_name ="";
-    $scope.sleep_series = ['수면(초)', ''];
-    $scope.feed_series = ['수유(초)', '분유(cc)'];
+    $scope.sleep_series = ['수면(분)', ''];
+    $scope.feed_series = ['수유(분)', '분유(cc)'];
     $scope.temp_series = ['온도', '미세먼지','이산화탄소','VOC'];
     $scope.dust_series = ['미세먼지', ''];
     $scope.co_series = ['이산화탄소', ''];
@@ -29,7 +29,63 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
     $scope.coArray = [];
     $scope.vocArray = [];
     $scope.dataDates = [];
-
+    $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
+    $scope.options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            yAxes: [
+                {
+                    id: 'y-axis-1',
+                    type: 'linear',
+                    display: true,
+                    position: 'left'
+                },
+                {
+                    id: 'y-axis-2',
+                    type: 'linear',
+                    display: true,
+                    position: 'right'
+                }
+            ]
+        }
+    };
+    $scope.sleepOptions = {
+        responsive: true,
+        maintainAspectRatio: false
+    };
+    $scope.dataOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            yAxes: [
+                {
+                    id: 'y-axis-1',
+                    type: 'linear',
+                    display: true,
+                    position: 'left'
+                },
+                {
+                    id: 'y-axis-2',
+                    type: 'linear',
+                    display: true,
+                    position: 'left'
+                },
+                {
+                    id: 'y-axis-3',
+                    type: 'linear',
+                    display: true,
+                    position: 'right'
+                },
+                {
+                    id: 'y-axis-4',
+                    type: 'linear',
+                    display: true,
+                    position: 'right'
+                }
+            ]
+        }
+    };
     $scope.addMaxSleepRepeat = function() {
         $scope.maxSleepRepeat += 5;
     };
@@ -117,6 +173,7 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
                     $scope.maxSleepRepeat = 5;
                     $scope.maxListRepeat = 10;
                     $scope.maxTHListRepeat = 5;
+                    $scope.showType = 'SFlist';
                 }
                 else {
 
@@ -152,7 +209,7 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
                         s_date = "" + (s_date.getYear()+1900) +"_"+ (s_date.getMonth()+1) +"_"+ s_date.getDate();
 
                         if(prev_date != s_date && prev_date != ""){
-                            array.push(total_sleep);
+                            array.push(total_sleep/60);
                             dates.push(""+prev_date);
                             total_sleep = 0;
                         }
@@ -160,8 +217,26 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
                         total_sleep += data[i].s_total;
                         prev_date = s_date;
                     }
+                    if(data.length>0) {
+                        array.push(total_sleep);
+                        dates.push("" + prev_date);
+                    }
+
+                    $scope.sleepData = {
+                        type: "line",
+                        labels: dates,
+                        datasets: [{
+                            label: "수면시간(분)",
+                            backgroundColor: 'rgba(255,204,51,0.8)',
+                            hoverBackgroundColor: 'rgb(255,204,51)',
+                            borderColor: 'rgba(255,204,51,1 )',
+                            hoverBorderColor: 'rgba(255,204,51,1 )',
+                            data: array
+                        }]
+                    };
+                    /*
                     $scope.sleepArray = [array,[]];
-                    $scope.sleepDates = dates;
+                    $scope.sleepDates = dates;*/
                        /* */
                     $scope.loadingStyle = {'display': 'none'};
                 }
@@ -201,7 +276,7 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
                         f_date = "" + (f_date.getYear()+1900) +"_"+ (f_date.getMonth()+1) +"_"+ f_date.getDate();
 
                         if(prev_date != f_date && prev_date != ""){
-                            array1.push(total_feed);
+                            array1.push(total_feed/60);
                             array2.push(total_powder);
                             dates.push(""+prev_date);
                             total_feed = 0;
@@ -219,8 +294,34 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
                         prev_date = f_date;
                     }
 
-                    $scope.feedArray = [array1,array2];
-                    $scope.feedDates = dates;
+                    if(data.length>0) {
+                        array1.push(total_feed);
+                        array2.push(total_powder);
+                        dates.push(""+prev_date);
+                    }
+
+                    $scope.feedData = {
+                        type: "line",
+                        labels: dates,
+                        datasets: [{
+                            label: "수유시간(분)",
+                            backgroundColor: 'rgba(100,255,100,0.3)',
+                            hoverBackgroundColor: 'rgba(255,255,255,0.7)',
+                            borderColor: 'rgba(100,255,100,0.5)',
+                            hoverBorderColor: 'rgba(239,111,32,1)',
+                            data: array1,
+                            yAxisID: 'y-axis-1'
+                        }, {
+                            label: "분유량(cc)",
+                            backgroundColor: 'rgba(100,100,255,0.3)',
+                            hoverBackgroundColor: 'rgba(255,255,255,0.7)',
+                            borderColor: 'rgba(100,100,255,0.5)',
+                            hoverBorderColor: 'rgba(239,111,32,1)',
+                            data: array2,
+                            yAxisID: 'y-axis-2'
+                        }]
+                    };
+
                     $scope.loadingStyle = {'display': 'none'};
                 }
                 else {
@@ -282,11 +383,61 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
 
                         prev_date = d_date;
                     }
-                    $scope.tempArray = [$scope.tempArray,$scope.dustArray,$scope.coArray,$scope.vocArray];
+
+                    if(data.length>0) {
+                        total_temp = total_temp/cnt;
+                        total_dust = total_dust/cnt;
+                        total_co = total_co/cnt;
+                        total_voc = total_voc/cnt;
+                        $scope.tempArray.push(total_temp.toFixed(3));
+                        $scope.dustArray.push(total_dust.toFixed(3));
+                        $scope.coArray.push(total_co.toFixed(3));
+                        $scope.vocArray.push(total_voc.toFixed(3));
+                        $scope.dataDates.push(""+prev_date);
+                    }
+                    $scope.dataData = {
+                        type: "line",
+                        labels: $scope.dataDates,
+                        datasets: [{
+                            label: "온도",
+                            backgroundColor: 'rgba(255,204,51,0.0)',
+                            hoverBackgroundColor: 'rgba(255,255,255,0.7)',
+                            borderColor: 'rgba(255,100,100,0.5 )',
+                            hoverBorderColor: 'rgba(255,204,51,1 )',
+                            data: $scope.tempArray,
+                            yAxisID: 'y-axis-1'
+                        }, {
+                            label: "미세먼지",
+                            backgroundColor: 'rgba(239,130,32,0.0)',
+                            hoverBackgroundColor: 'rgba(255,255,255,0.7)',
+                            borderColor: 'rgba(100,255,100,0.5)',
+                            hoverBorderColor: 'rgba(239,111,32,1)',
+                            data: $scope.dustArray,
+                            yAxisID: 'y-axis-2'
+                        }, {
+                            label: "이산화탄소",
+                            backgroundColor: 'rgba(239,130,32,0.0)',
+                            hoverBackgroundColor: 'rgba(255,255,255,0.7)',
+                            borderColor: 'rgba(100,100,255,0.5)',
+                            hoverBorderColor: 'rgba(239,111,32,1)',
+                            data: $scope.coArray,
+                            yAxisID: 'y-axis-3'
+                        }, {
+                            label: "VOC",
+                            backgroundColor: 'rgba(239,130,32,0.0)',
+                            hoverBackgroundColor: 'rgba(255,255,255,0.7)',
+                            borderColor: 'rgba(239,130,32,0.5)',
+                            hoverBorderColor: 'rgba(239,111,32,1)',
+                            data: $scope.vocArray,
+                            yAxisID: 'y-axis-4'
+                        }]
+                    };
+
+                    /*$scope.tempArray = [$scope.tempArray,$scope.dustArray,$scope.coArray,$scope.vocArray];
                     $scope.dustArray = [$scope.dustArray,[]];
                     $scope.coArray = [$scope.coArray,[]];
-                    $scope.vocArray = [$scope.vocArray,[]];
-                    /* */
+                    $scope.vocArray = [$scope.vocArray,[]];*/
+
                     $scope.loadingStyle = {'display': 'none'};
                 }
                 else {
