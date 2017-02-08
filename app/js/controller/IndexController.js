@@ -4,6 +4,7 @@
 
 var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, $rootScope, $filter, HOST, Excel) {
     var userObject = store.get('obj');
+    $scope.patient = null;
     $scope.start = false;
     $scope.quantity = 4;
     $scope.selected_u_name ="";
@@ -147,7 +148,8 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
     }];
 
 
-    $scope.diaryListPost = function (u_id,u_name) {
+    $scope.diaryListPost = function (u_id,u_name,patient) {
+        $scope.patient = patient;
         $scope.selected_u_name = u_name;
         $scope.loadingStyle = {'display': 'block'};
         $scope.start = true;
@@ -182,7 +184,7 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
     };
 
 
-    $scope.sleepListPost = function (u_id,u_name) {
+    $scope.sleepListPost = function (u_id,u_name,patitent) {
         $scope.selected_u_name = u_name;
         $scope.loadingStyle = {'display': 'block'};
         var patientObject = {
@@ -247,7 +249,7 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
     };
 
 
-    $scope.feedListPost = function (u_id,u_name) {
+    $scope.feedListPost = function (u_id,u_name,patitent) {
         $scope.selected_u_name = u_name;
         $scope.loadingStyle = {'display': 'block'};
         var patientObject = {
@@ -329,7 +331,7 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
                 }
             });
     };
-    $scope.dataListPost = function (u_id,u_name) {
+    $scope.dataListPost = function (u_id,u_name,patient) {
         $scope.selected_u_name = u_name;
         $scope.loadingStyle = {'display': 'block'};
         var patientObject = {

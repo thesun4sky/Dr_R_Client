@@ -14,11 +14,12 @@
 <div class="container-fluid" style="padding-top: 50px; background-color: whitesmoke" ng-hide="!start">
     <div class="row">
 
-        <div class="main">
-            <h1>Dr.{{a_name}}님의 환자</h1>
+        <div class="main"><!--
+            <h1>Dr.{{a_name}}님의 환자</h1>-->
 
             <!-- 로딩 -->
-            <div class="sk-fading-circle" ng-style="loadingStyle">
+            <div ng-style="loadingStyle" class="col-sm-12 col-md-12 col-lg-12 col-xs-12" style="z-index: 9; background-color: rgba(255,255,255,0.5); position: fixed; height: 1000px"></div>
+            <div class="sk-fading-circle" ng-style="loadingStyle" style="z-index: 11">
                 <div class="sk-circle1 sk-circle"></div>
                 <div class="sk-circle2 sk-circle"></div>
                 <div class="sk-circle3 sk-circle"></div>
@@ -38,7 +39,10 @@
 
             </div>
 
-            <h3>{{selected_u_name}} 환자 일지</h3>
+            <h3>{{selected_u_name}} ({{patient.u_sex}})<button class="btn btn-link" ng-click="hideUser(patient.u_id)">
+                <span class="glyphicon glyphicon-eye-close"></span> 퇴원처리</button></h3>
+            <p style="color: #9d9d9d">출생일자 : {{patient.u_born | date:"yyyy년MM월dd일"}} / 예정일자 : {{patient.u_expected | date:"yyyy년MM월dd일"}} / 가입일자 : {{patient.u_join_date | date:"yyyy년MM월dd일"}}</p>
+            <br>
 
             <ul class="nav nav-tabs nav-justified">
                 <li role="presentation" ng-class="{'active': showType === 'SFlist' || showType === 'SFgraph'}"><a ui-sref="main" ng-click="showValue('SF')">수면/수유</a></li>
@@ -97,6 +101,7 @@
                         <th>수유 시작</th>
                         <th>수유 종료</th>
                         <th>총 수유시간(양)</th>
+                        <th>비고</th>
                     </tr>
                     </thead>
                     <tbody>

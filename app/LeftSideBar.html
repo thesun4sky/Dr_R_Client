@@ -1,6 +1,6 @@
 <div class="container-fluid" ng-controller="leftSideBarCtrl">
     <!-- 로딩 -->
-    <div class="sk-fading-circle" ng-style="loadingStyle">
+    <div class="sk-fading-circle" ng-style="loadingStyle" style="z-index: 11">
         <div class="sk-circle1 sk-circle"></div>
         <div class="sk-circle2 sk-circle"></div>
         <div class="sk-circle3 sk-circle"></div>
@@ -20,7 +20,7 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" ui-sref="main" role="button" aria-expanded="false">
                     환자 목록<span class="caret"></span>
                 </a>
-                <ul class="dropdown-menu" role="menu">
+               <!-- <ul class="dropdown-menu" role="menu">
                     <li><a href="#">전체보기</a></li>
                     <li class="divider"></li>
                     <li><a href="#">소아청소년과</a></li>
@@ -29,11 +29,13 @@
                     <li class="divider"></li>
                     <li><a href="#">남자</a></li>
                     <li><a href="#">여자</a></li>
-                </ul>
+                </ul>-->
             </li>
         </ul>
-        <ul class="nav nav-sidebar" ng-repeat="p in allPatientList" ng-click="diaryListPost(p.u_id,p.u_name)" style="margin-bottom: 0px">
-            <li><a ui-sref="main">{{p.u_name}} <span class="sr-only">(current)</span>({{p.u_sex}})</a></li>
+        <ul class="nav nav-sidebar" ng-repeat="p in allPatientList" ng-click="diaryListPost(p.u_id,p.u_name,p)" style="margin-bottom: 0px">
+            <li ng-hide="p.u_discharged == 1"><a ui-sref="main">{{p.u_name}} <span class="sr-only">(current)</span>({{p.u_sex}})</a></li>
+            <li ng-hide="p.u_discharged == 1" style="margin-top: -8px; font-size: 10px; color: currentColor; background-color: gainsboro;"><center>
+                {{p.u_born | date:"yyyy.MM.dd 출생"}} </center></li>
         </ul>
     </div>
 </div>
