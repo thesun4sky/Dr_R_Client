@@ -9,7 +9,7 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
     $scope.quantity = 4;
     $scope.selected_u_name ="";
     $scope.sleep_series = ['수면(분)', ''];
-    $scope.feed_series = ['수유(분)', '분유(cc)'];
+    $scope.feed_series = ['수유(분)', '분유(ml)'];
     $scope.temp_series = ['온도', '미세먼지','이산화탄소','VOC'];
     $scope.dust_series = ['미세먼지', ''];
     $scope.co_series = ['이산화탄소', ''];
@@ -211,7 +211,7 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
                         s_date = "" + (s_date.getYear()+1900) +"_"+ (s_date.getMonth()+1) +"_"+ s_date.getDate();
 
                         if(prev_date != s_date && prev_date != ""){
-                            array.push(total_sleep/60);
+                            array.push((total_sleep/60).toFixed(3));
                             dates.push(""+prev_date);
                             total_sleep = 0;
                         }
@@ -220,7 +220,7 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
                         prev_date = s_date;
                     }
                     if(data.length>0) {
-                        array.push(total_sleep);
+                        array.push((total_sleep/60).toFixed(3));
                         dates.push("" + prev_date);
                     }
 
@@ -278,7 +278,7 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
                         f_date = "" + (f_date.getYear()+1900) +"_"+ (f_date.getMonth()+1) +"_"+ f_date.getDate();
 
                         if(prev_date != f_date && prev_date != ""){
-                            array1.push(total_feed/60);
+                            array1.push((total_feed/60).toFixed(3));
                             array2.push(total_powder);
                             dates.push(""+prev_date);
                             total_feed = 0;
@@ -297,7 +297,7 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
                     }
 
                     if(data.length>0) {
-                        array1.push(total_feed);
+                        array1.push((total_feed/60).toFixed(3));
                         array2.push(total_powder);
                         dates.push(""+prev_date);
                     }
@@ -314,7 +314,7 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
                             data: array1,
                             yAxisID: 'y-axis-1'
                         }, {
-                            label: "분유량(cc)",
+                            label: "분유량(ml)",
                             backgroundColor: 'rgba(100,100,255,0.3)',
                             hoverBackgroundColor: 'rgba(255,255,255,0.7)',
                             borderColor: 'rgba(100,100,255,0.5)',

@@ -111,7 +111,7 @@
                         <td>{{f.f_start | date:"h시 mm분"}}</td>
                         <td><span ng-if="f.feed!='분유'">{{f.f_end | date:"h시 mm분"}}</span></td>
                         <td><span ng-if="f.feed!='분유'">{{timeSplit(f.f_total)}}</span>
-                            <span ng-if="f.feed=='분유'">{{f.f_total}}cc</span></td>
+                            <span ng-if="f.feed=='분유'">{{f.f_total}}ml</span></td>
                         <td>{{f.feed}}</td>
                     </tr>
                     </tbody>
