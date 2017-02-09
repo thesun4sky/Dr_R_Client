@@ -206,7 +206,7 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
                     var dates = [];
                     var prev_date = "";
                     var total_sleep = 0;
-                    for(var i=0; i<data.length; i++){
+                    for(var i=0; i<data.length && dates.length<60; i++){
                         var s_date = new Date(data[i].s_start);
                         s_date = "" + (s_date.getYear()+1900) +"_"+ (s_date.getMonth()+1) +"_"+ s_date.getDate();
 
@@ -273,7 +273,7 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
                     var array1 = [];
                     var array2 = [];
                     var dates = [];
-                    for(var i=0; i<data.length; i++){
+                    for(var i=0; i<data.length && dates.length<60; i++){
                         var f_date = new Date(data[i].f_start);
                         f_date = "" + (f_date.getYear()+1900) +"_"+ (f_date.getMonth()+1) +"_"+ f_date.getDate();
 
@@ -357,7 +357,7 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
                     var total_dust= 0;
                     var total_co = 0;
                     var total_voc = 0;
-                    for(var i=0, cnt=0; i<data.length; i++,cnt++){
+                    for(var i=0, cnt=0; i<data.length && $scope.dataDates.length<60; i++,cnt++){
                         var d_date = new Date(data[i].d_date);
                         d_date = "" + (d_date.getYear()+1900) +"_"+ (d_date.getMonth()+1) +"_"+ d_date.getDate();
 
