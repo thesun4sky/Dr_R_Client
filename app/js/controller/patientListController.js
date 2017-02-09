@@ -54,6 +54,7 @@ var __PatientListCtrl = function ($interval, $scope, $http, store, $state, $uibM
             .success(function (data, status, headers, config) {
                 if (data) { //존재하지 않음,아이디 사용가능
                     alert('환자가 재입원처리 되었습니다.');
+                    $state.go($state.current, {}, {reload: true});
                     $scope.allPatientListPost();
                     $scope.loadingStyle = {'display': 'none'};
                 }
@@ -78,6 +79,7 @@ var __PatientListCtrl = function ($interval, $scope, $http, store, $state, $uibM
             .success(function (data, status, headers, config) {
                 if (data) { //존재하지 않음,아이디 사용가능
                     alert('환자가 퇴원처리 되었습니다.');
+                    $state.go($state.current, {}, {reload: true});
                     $scope.allPatientListPost();
                     $scope.loadingStyle = {'display': 'none'};
                 }

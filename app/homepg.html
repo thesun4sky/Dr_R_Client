@@ -39,7 +39,7 @@
 
             </div>
 
-            <h3>{{selected_u_name}} ({{patient.u_sex}})<button class="btn btn-link" ng-click="hideUser(patient.u_id)">
+            <h3>{{selected_u_name}} ({{patient.u_sex}})<button class="btn btn-link" ng-click="discharged(patient.u_id)">
                 <span class="glyphicon glyphicon-eye-close"></span> 퇴원처리</button></h3>
             <p style="color: #9d9d9d">출생일자 : {{patient.u_born | date:"yyyy년MM월dd일"}} / 예정일자 : {{patient.u_expected | date:"yyyy년MM월dd일"}} / 가입일자 : {{patient.u_join_date | date:"yyyy년MM월dd일"}}</p>
             <br>

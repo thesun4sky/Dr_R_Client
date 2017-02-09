@@ -470,6 +470,29 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
     };
 
 
+    $scope.discharged = function(u_id){
+
+        var requestObject = {
+            u_id : u_id
+        };
+
+        $http({
+            method: 'POST', //방식
+            url: HOST + "/web/api/discharged", /* 통신할 URL */
+            data: requestObject, /* 파라메터로 보낼 데이터 */
+            headers: {'Content-Type': 'application/json; charset=utf-8'} //헤더
+        })
+            .success(function (data, status, headers, config) {
+                if (data) { //존재하지 않음,아이디 사용가능
+                    alert('환자가 퇴원처리 되었습니다.');
+                    $state.go($state.current, {}, {reload: true});
+                    $scope.loadingStyle = {'display': 'none'};
+                }
+                else {
+                    alert('연결상태에 오류가 있습니다.');
+                }
+            });
+    };
     $scope.showImg=function(url) {
         url = "/storedimg/" + url;
         window.open(url,'Image','width=500px,height=500px,resizable=1');
