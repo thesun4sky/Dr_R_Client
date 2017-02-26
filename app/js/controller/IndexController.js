@@ -110,7 +110,7 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
 
     $scope.timeSplit = function(mill) {
         var str = "";
-        h = parseInt(mill/360);
+        h = parseInt(mill/3600);
         if(h > 0) str += h + "시간 ";
         mill = mill%360;
         m = parseInt(mill/60);
