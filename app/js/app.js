@@ -24,7 +24,7 @@ angular.module("homeApp", [
     .controller("leftSideBarCtrl", __LeftSidebarCtrl)
     .controller("loginCtrl", __LoginCtrl)
     .controller("indexCtrl", __IndexCtrl)
-    .controller("diaryCtrl", __DiaryCtrl)
+    .controller("helpCtrl", __HelpCtrl)
     .controller("diaryManageCtrl", __DiaryManageCtrl)
     .controller("patientEvaluateCtrl", __PatientEvaluateCtrl)
     .controller("patientListCtrl", __PatientListCtrl)
@@ -177,11 +177,11 @@ angular.module("homeApp", [
                 }
             })
 
-        .state('diary', {
-            url: '/diary',
-            templateUrl: 'diary.html',
-            controller: 'diaryCtrl',
-            controllerAs: 'diary',
+        .state('help', {
+            url: '/help',
+            templateUrl: 'help.html',
+            controller: 'helpCtrl',
+            controllerAs: 'help',
             data: {
                 requireLogin: true
             }
