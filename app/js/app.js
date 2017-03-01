@@ -141,9 +141,9 @@ angular.module("homeApp", [
         };
     })
 
-    .constant('HOST', 'http://localhost:8080')
+    // .constant('HOST', 'http://localhost:8080')
     //.constant('HOST', 'http://52.41.218.18:8080')
-    // .constant('HOST', 'http://52.205.170.152:8080')
+    .constant('HOST', 'http://52.205.170.152:8080')
 
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
         $stateProvider
