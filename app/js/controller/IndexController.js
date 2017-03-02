@@ -201,6 +201,10 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
         })
             .success(function (data, status, headers, config) {
                 if (data) { //존재하지 않음,아이디 사용가능
+                    for(var i=0; i<data.length; i++){
+                        data[i].s_start = data[i].s_start - 32400000;
+                        data[i].s_end = data[i].s_end - 32400000;
+                    }
                     $scope.sleep_List = data;
                     $scope.sleepArray = [];
                     $scope.sleepDates = [];
@@ -266,6 +270,10 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
         })
             .success(function (data) {
                 if (data) { //존재하지 않음,아이디 사용가능
+                    for(var i=0; i<data.length; i++){
+                        data[i].f_start = data[i].f_start - 32400000;
+                        data[i].f_end = data[i].f_end - 32400000;
+                    }
                     $scope.feed_List = data;
                     $scope.feedArray = [];
                     $scope.feedDates = [];
