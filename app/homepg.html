@@ -41,7 +41,9 @@
 
             <h3>{{selected_u_name}} ({{patient.u_sex}})<button class="btn btn-link" ng-click="discharged(patient.u_id)">
                 <span class="glyphicon glyphicon-eye-close"></span> 퇴원처리</button></h3>
+            <p style="color: #9d9d9d">키 : {{patient.u_h}}cm  /  몸무게 : {{patient.u_w}}kg </p>
             <p style="color: #9d9d9d">출생일자 : {{patient.u_born | date:"yyyy년MM월dd일"}} / 예정일자 : {{patient.u_expected | date:"yyyy년MM월dd일"}} / 가입일자 : {{patient.u_join_date | date:"yyyy년MM월dd일"}}</p>
+
             <br>
 
             <ul class="nav nav-tabs nav-justified">
@@ -75,8 +77,8 @@
                     <tr ng-repeat="s in sleep_List track by $index" ng-hide="$index > maxSleepRepeat">
                         <td>{{s.s_start | date:"MM월dd일"}}</td>
                         <td>{{s.u_name}}</td>
-                        <td>{{s.s_start | date:"h시 mm분 ss초"}}</td>
-                        <td>{{s.s_end | date:"h시 mm분 ss초"}}</td>
+                        <td>{{s.s_start | date:"a h:mm"}}</td>
+                        <td>{{s.s_end | date:"a h:mm"}}</td>
                         <td>{{timeSplit(s.s_total)}}</td>
                     </tr>
                     </tbody>
@@ -108,8 +110,8 @@
                     <tr ng-repeat="f in feed_List track by $index" ng-hide="$index > maxFeedRepeat">
                         <td>{{f.f_start | date:"MM월dd일"}}</td>
                         <td>{{f.u_name}}</td>
-                        <td>{{f.f_start | date:"h시 mm분"}}</td>
-                        <td><span ng-if="f.feed!='분유'">{{f.f_end | date:"h시 mm분"}}</span></td>
+                        <td>{{f.f_start | date:"a h:mm"}}</td>
+                        <td><span ng-if="f.feed!='분유'">{{f.f_end | date:"a h:mm"}}</span></td>
                         <td><span ng-if="f.feed!='분유'">{{timeSplit(f.f_total)}}</span>
                             <span ng-if="f.feed=='분유'">{{f.f_total}}ml</span></td>
                         <td>{{f.feed}}</td>

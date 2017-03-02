@@ -110,13 +110,15 @@ var __IndexCtrl = function ($interval, $scope, $http, store, $state, $uibModal, 
 
     $scope.timeSplit = function(mill) {
         var str = "";
+        if(mill<60){
+            return "1분 이내"
+        }
         h = parseInt(mill/3600);
         if(h > 0) str += h + "시간 ";
         mill = mill%3600;
         m = parseInt(mill/60);
         if(m > 0) str += m + "분 ";
-        s = mill%60;
-        return str+s+"초";
+        return str;
     };
 
     $scope.patientListPost = function () {

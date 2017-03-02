@@ -37,7 +37,7 @@
         <ul class="nav nav-sidebar" ng-repeat="p in allPatientList" ng-click="diaryListPost(p.u_id,p.u_name,p)" style="margin-bottom: 0px">
             <li ng-hide="p.u_discharged == 1"><a ui-sref="main">{{p.u_name}} <span class="sr-only">(current)</span>({{p.u_sex}})</a></li>
             <li ng-hide="p.u_discharged == 1" style="margin-top: -8px; font-size: 10px; color: currentColor; background-color: gainsboro;"><center>
-                {{p.u_join_date | date:"yyyy.MM.dd 가입"}} <p style="margin: 0;">{{p.u_w}}kg  / {{p.u_h}}cm </p> </center></li>
+                {{p.u_born | date:"yyyy.MM.dd 출생"}} </center></li>
         </ul>
     </div>
 </div>
